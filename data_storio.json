@@ -1,0 +1,20 @@
+[
+  {
+    "job title": "Senior Data Scientist",
+    "Responsibility": "- Research, design, and build sophisticated AI/ML models to solve complex business problems.\n- Develop and implement advanced analytics methodologies to accurately measure the effects of our initiatives.\n- Work with stakeholders to understand business goals and take ownership of projects from start to finish.\n- Build models using best practices for MLOps and Data Science.\n- Collaborate with product owners, analysts, and ML engineers to align on project goals and technical solutions.\n- Identify and propose new data science solutions and analytics methodologies.",
+    "Required Relevant Experience (Years)": 5,
+    "Required Seniority Level": "senior",
+    "Relevant Field of Study/Major": "Computer Science, Statistics, or Mathematics",
+    "Required Language(s) and Proficiency Level": "english",
+    "Specific Required Skills/Keywords": "3-5 years of experience in a data science role within a commercial environment. Hands-on experience with the full machine learning lifecycle. Proven expertise in experimental design, causal inference, and advanced statistical analysis. Experience with collaborative code development, including version control and code review. Proficiency in Python (Pandas, NumPy, Scikit-learn), SQL, Snowflake, and MLFlow. Strong business intuition and communication skills.",
+    "Target Job Industry/Sector": "E-commerce - specifically Personalized Photo Products & Printing",
+    "Behavioral requirement": "- Deliver tangible business value by connecting your analytical findings to commercial outcomes.\n- Take ownership of the entire machine learning lifecycle from data cleaning to model deployment and monitoring.\n- Influence the future of our data science practice by identifying opportunities to improve our MLOps platform and data infrastructure.\n- Ensure the smooth operationalization of your work by preparing clear requirements for data and ML engineering teams.",
+    "Company Values": "",
+    "Company name": "Storio Group",
+    "Business use cases": "Product Optimization & User Experience; Conversion Rate Optimization; Marketing Analytics & Optimization; Product Analytics for Photo Editor Applications",
+    "Tech/ML solutions": "",
+    "Tools": "Python (Pandas, NumPy, Scikit-learn), SQL, Snowflake, MLFlow",
+    "submittedAt": "2025-10-28T09:39:56.075-04:00",
+    "formMode": "test"
+  }
+]

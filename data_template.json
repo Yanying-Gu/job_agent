@@ -1,0 +1,20 @@
+[
+  {
+    "job title": "Senior Data Scientist",
+    "Responsibility": "",
+    "Required Relevant Experience (Years)": 5,
+    "Required Seniority Level": "senior",
+    "Relevant Field of Study/Major": "Computer Science, Statistics, or Mathematics",
+    "Required Language(s) and Proficiency Level": "english",
+    "Specific Required Skills/Keywords": "",
+    "Target Job Industry/Sector": "E-commerce - specifically Personalized Photo Products & Printing",
+    "Behavioral requirement": "",
+    "Company Values": "",
+    "Company name": "Storio Group",
+    "Business use cases": "Product Optimization & User Experience; Conversion Rate Optimization; Marketing Analytics & Optimization; Product Analytics for Photo Editor Applications",
+    "Tech/ML solutions": "classification, anomaly detection, recommendation system, time series analysis, etc.",
+    "Tools": "Python (Pandas, NumPy, Scikit-learn), SQL, Snowflake, MLFlow",
+    "submittedAt": "2025-10-28T09:39:56.075-04:00",
+    "formMode": "test"
+  }
+]

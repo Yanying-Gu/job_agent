@@ -1,0 +1,120 @@
+{
+  "name": "AI CV Updater",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "job description",
+        "formFields": {
+          "values": [
+            { "fieldLabel": "job title" },
+            { "fieldLabel": "Responsibility", "fieldType": "textarea" },
+            { "fieldLabel": "Required Relevant Experience (Years)", "fieldType": "number" },
+            {
+              "fieldLabel": "Required Seniority Level",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  { "option": "senior" },
+                  { "option": "mid-level" },
+                  { "option": "staff/lead" },
+                  { "option": "principle" }
+                ]
+              }
+            },
+            { "fieldLabel": "Relevant Field of Study/Major" },
+            { "fieldLabel": "Required Language(s) and Proficiency Level" },
+            { "fieldLabel": "Specific Required Skills/Keywords", "fieldType": "textarea" },
+            { "fieldLabel": "Target Job Industry/Sector" },
+            { "fieldLabel": "Behavioral requirement", "fieldType": "textarea" },
+            { "fieldLabel": "Company Values", "fieldType": "textarea" },
+            { "fieldLabel": "Company name" }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [0, 0],
+      "id": "form_trigger",
+      "name": "On form submission"
+    },
+    {
+      "parameters": {
+        "filePath": "C:\\\\Users\\\\yanyi\\\\Documents\\\\redeployment\\\\CV_content_template_v1.1.txt",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1.1,
+      "position": [260, -80],
+      "id": "read_cv",
+      "name": "Read CV File"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.binaryToText",
+      "typeVersion": 1,
+      "position": [460, -80],
+      "id": "convert_cv",
+      "name": "Convert CV to Text"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a professional resume assistant.\nUse the candidate's CV content and new job responsibility below to suggest updates.\n\n---\nCandidate CV:\n{{ $json.cv_text }}\n\nNew responsibility to add or update:\n{{ $json.Responsibility }}\n\nOutput: Provide the revised CV text in the same style and tone.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [680, 0],
+      "id": "ai_agent",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [480, 200],
+      "id": "openai_model",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "S85Pqlm3N6Y4LMzn",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [{ "node": "Read CV File", "type": "main", "index": 0 }]
+      ]
+    },
+    "Read CV File": {
+      "main": [
+        [{ "node": "Convert CV to Text", "type": "main", "index": 0 }]
+      ]
+    },
+    "Convert CV to Text": {
+      "main": [
+        [{ "node": "AI Agent", "type": "main", "index": 0 }]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [{ "node": "AI Agent", "type": "ai_languageModel", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "e41c6c5e-1d90-4e13-9a34-46f34772849e"
+}
