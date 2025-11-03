@@ -1,6 +1,178 @@
-[
-  {
-    "Tech/ML solutions": "",
-    "Tools": "Python (Pandas, NumPy, Scikit-learn), SQL, Snowflake, MLFlow"
-  }
-]
+{
+  "Tech/ML solutions": "",
+  "Tools": "Python (Pandas, NumPy, Scikit-learn), SQL, Snowflake, MLFlow",
+  "contact": {
+    "phone": "+316 10 95 27 90",
+    "email": "yanying.gu@gmail.com",
+    "location": "Alkmaar (NL)",
+    "linkedin": "yanying-gu"
+  },
+  "competencies": [
+    "Creative",
+    "Open",
+    "Conscientious",
+    "Balanced"
+  ],
+  "education": [
+    {
+      "degree": "PhD Wireless and Mobile Communications",
+      "field": "Electrical Engineering, Mathematics and Computer Science (EEMCS)",
+      "institution": "Delft University of Technology",
+      "period": "2006 – 2010"
+    },
+    {
+      "degree": "MSc Telecommunications",
+      "institution": "Delft University of Technology",
+      "period": "2004 – 2006",
+      "honors": "Cum Laude, graduated with honors, top 5%"
+    }
+  ],
+  "skills": {
+    "technical": ["Machine learning", "MLOps", "AI", "Python", "SQL", "Snowflake", "MLFlow", "Pandas", "NumPy", "Scikit-learn"],
+    "soft_skills": ["Leadership"]
+  },
+  "languages": {
+    "English": "fully professional",
+    "Dutch": "NT2 P.II diploma"
+  },
+  "profile": "Experienced AI and Data Science leader with 15 years of success delivering scalable ML solutions on AWS and Azure. Skilled in aligning AI strategy with business goals, leading cross-functional teams, and driving innovation across global organizations.",
+  "work_experience": [
+    {
+      "title": "Senior AI Engineer",
+      "company": "Ayvens Digital & IT, Société Générale",
+      "location": "Amsterdam",
+      "period": "2022 - present",
+      "projects": [
+        {
+          "name": "SIMS ML in AWS",
+          "industry": "Automotive/Fleet Management",
+          "business_use_case": "Automated Decision Making, Operational Efficiency, Maintenance Optimization",
+          "tech_solutions": ["Classification", "Decision Engine", "ML Pipeline"],
+          "tools": ["AWS SageMaker", "Python", "GitLab CI/CD"],
+          "description": "Situation: The original SIMS V1 system used a rigid rules engine that was difficult to maintain and could not scale with evolving business needs. An intelligent, automated solution was required to improve efficiency and support growth. Action: Led the end-to-end design of a scalable ML decision engine on AWS SageMaker, translating business needs into production-ready models with full lifecycle coverage. Result: The solution was deployed in 6 countries and automated 50% of maintenance approvals, significantly reducing delays, lowering costs, and enhancing system scalability."
+        },
+        {
+          "name": "ML Enhancement in AWS",
+          "industry": "Automotive/Fleet Management",
+          "business_use_case": "MLOps, Platform Engineering, Data Pipeline Optimization",
+          "tech_solutions": ["ETL Pipeline", "ML Pipeline", "CI/CD Automation"],
+          "tools": ["Snowflake", "Snowpark", "SageMaker Pipelines", "GitLab CI/CD", "PySpark"],
+          "description": "Situation: The ML pipeline lacked structure—ETL was inconsistently managed with PySpark on SageMaker, training was done through scattered Jupyter notebooks, and CI/CD was fragmented between GitLab and Airflow, creating inefficiencies and team dependencies. Action: Redesigned the ML workflow by migrating ETL to Snowflake with Snowpark, replacing Airflow with SageMaker Pipelines, and automating deployment via GitLab CI/CD. Result: Delivered a robust ML platform with unified data processing, streamlined CI/CD, and significantly reduced time-to-deploy and increased team efficiency."
+        },
+        {
+          "name": "SIMS ML in Azure",
+          "industry": "Automotive/Fleet Management",
+          "business_use_case": "Cloud Migration, MLOps, Production ML Deployment",
+          "tech_solutions": ["ML Pipeline", "Model Management", "Cloud Infrastructure"],
+          "tools": ["Azure Databricks", "Unity Catalog", "MLflow", "Azure DevOps"],
+          "description": "Situation: In 2024, the team was downsized from 5 to 2 FTEs, losing key support resources. This required a strategic shift to optimize delivery with fewer resources while maintaining AI output. Action: I implemented a E2E ML solutions in Azure Databricks platform. I managed cross-functional teams to ensure smooth execution. Result: Deployed the first production ML model in Azure using Databricks, Unity catalog, MLflow, and Azure DevOps, laying the groundwork for scalable, Azure-native ML deployments across countries."
+        },
+        {
+          "name": "AI Alex – AI Agent + MCP (Proof of Concept)",
+          "industry": "Automotive/Fleet Management",
+          "business_use_case": "Process Automation, Conversational AI, Intelligent Decision Support",
+          "tech_solutions": ["AI Agent", "RAG Pipeline", "LLM Integration", "Tool Integration"],
+          "tools": ["LLMs", "LangChain", "Azure Databricks", "MCP", "RAG"],
+          "description": "Situation: Manual maintenance approvals were inefficient and time-consuming, highlighting the need for an interactive, intelligent system to streamline collaboration with garages and reduce human intervention. Action: I led the development of AI Alex, an AI agent built with LLMs, LangChain, and RAG pipelines using Azure Databricks and integrated with MCP tools. Result: The AI agent and MCP solution were successfully deployed in the staging environment, showcasing their potential to automate and improve the existing manual approval process."
+        },
+        {
+          "name": "Reference Pricing System (RPS) – ML-Driven Vehicle Price Estimation",
+          "industry": "Automotive/Fleet Management",
+          "business_use_case": "Price Prediction, Market Analysis, Operational Efficiency",
+          "tech_solutions": ["Regression", "XGBoost", "Automated Pricing", "Model Monitoring"],
+          "tools": ["AWS SageMaker", "Airflow", "Snowflake", "XGBoost", "Python"],
+          "description": "Situation: Manual vehicle pricing across multiple markets was inefficient, inconsistent, and unable to scale— necessitating an ML-based solution to improve speed and accuracy. Action: I designed and deployed an end-to-end ML system using SageMaker, Airflow, and Snowflake, centered around an XGBoost model. The solution automated pricing based on vehicle and market data, with built-in monitoring and retraining, and was fully integrated into business operations. Result: Now live in 23 countries, the system prices over 15,000 vehicles monthly, reducing manual work by 60% and significantly improving speed and accuracy."
+        }
+      ]
+    },
+    {
+      "title": "Data Scientist, MLE",
+      "company": "LeasePlan Digital & IT",
+      "location": "Amsterdam",
+      "period": "2018 - 2022",
+      "projects": [
+        {
+          "name": "Mileage Prediction – (Keep Me Safely on the Road)",
+          "industry": "Automotive/Fleet Management",
+          "business_use_case": "Predictive Maintenance, Fleet Management, Operational Optimization",
+          "tech_solutions": ["Time Series Forecasting", "Regression", "Batch Inference Pipeline"],
+          "tools": ["Python", "ML Pipelines", "Monitoring & Alerting"],
+          "description": "Situation: To enable proactive maintenance, accurate mileage forecasts were needed to identify vehicles approaching service thresholds within a 30-day window. Action: Starting from a business use case, I led the development of a proof of concept and scaled it into a full production-grade E2E ML solution. This included building data and ML pipelines, deploying a daily batch inference pipeline, and integrating it into the maintenance system—along with implementing monitoring and alerting to ensure production reliability. Result: The solution now delivers weekly mileage predictions for ~5 million vehicles with approximately 10% MAPE (Mean Absolute Percentage Error). This significantly improved the accuracy of maintenance planning, enabling timely interventions, reducing unplanned downtime, and enhancing overall fleet safety and operational efficiency."
+        }
+      ]
+    },
+    {
+      "title": "Data Scientist",
+      "company": "KPN",
+      "location": "Netherlands",
+      "period": "2017 - 2018",
+      "projects": [
+        {
+          "name": "IoT LoRa Performance Monitoring",
+          "industry": "Telecommunications/IoT",
+          "business_use_case": "Network Performance Monitoring, Time Series Analysis",
+          "tech_solutions": ["Time Series Analysis", "Anomaly Detection"],
+          "tools": ["Python", "Pandas", "NumPy"],
+          "description": "Internet of Things (IoT) LoRa performance monitoring data analysis and time series analysis"
+        },
+        {
+          "name": "Deep Learning for Classification",
+          "industry": "Telecommunications",
+          "business_use_case": "Image Classification, Text Classification",
+          "tech_solutions": ["CNN", "RNN", "Deep Learning", "Neural Networks"],
+          "tools": ["Python", "TensorFlow", "Keras"],
+          "description": "Machine Learning, Deep learning, neural networks architecture and hyperparameter tuning. Image classification using convolutional neural network (CNN, ConvNet). Text classification using recurrent neural network (RNN)"
+        },
+        {
+          "name": "Recommendation System",
+          "industry": "Telecommunications",
+          "business_use_case": "Personalization, Product Recommendations",
+          "tech_solutions": ["Recommendation System", "Collaborative Filtering"],
+          "tools": ["Python", "Scikit-learn"],
+          "description": "Built recommendation system for personalized content and product recommendations"
+        }
+      ]
+    },
+    {
+      "title": "Big Data Engineer, Architect",
+      "company": "KPN Business Operation, Big Data Team",
+      "location": "Den Haag",
+      "period": "2016 - 2017",
+      "projects": [
+        {
+          "name": "Big Data Infrastructure",
+          "industry": "Telecommunications",
+          "business_use_case": "Data Governance, Big Data Platform",
+          "tech_solutions": ["Data Governance", "Hadoop Ecosystem"],
+          "tools": ["Hadoop", "Atlas", "Ranger", "Hive"],
+          "description": "Data governance, Big Data solutions, Hadoop systems, Data management"
+        }
+      ]
+    },
+    {
+      "title": "Project Manager and Innovator",
+      "company": "KPN Mobile Innovation Voice & Signaling",
+      "location": "Den Haag",
+      "period": "2010 - 2016",
+      "projects": [
+        {
+          "name": "Mobile Network Innovation",
+          "industry": "Telecommunications",
+          "business_use_case": "Network Infrastructure, Mobile Communications",
+          "tech_solutions": ["Database Design", "Network Signaling"],
+          "tools": ["Relational Databases", "LTE/4G", "Diameter"],
+          "description": "Relational database and relational data modelling, LTE/4G and roaming, MVNO, Diameter signaling"
+        }
+      ]
+    }
+  ],
+  "years_of_experience": 15,
+  "specializations": [
+    "AI",
+    "Machine Learning",
+    "MLOps",
+    "AWS",
+    "Azure",
+    "Leadership"
+  ]
+}

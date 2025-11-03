@@ -1,0 +1,30 @@
+{
+  "contact_header": {
+    "name": "Yanying Gu",
+    "address": "Vijzelstraat 22, 1825KT, Alkmaar",
+    "phone": "+31610952790",
+    "email": "Yanying.gu@gmail.com"
+  },
+  "template_sections": {
+    "greeting": {
+      "formal": "Dear Sir or Madam,",
+      "with_name": "Dear Mr./Ms. {hiring_manager_name},"
+    },
+    "opening_paragraph": "I am writing to express my {interest_level} interest in the {job_title} position {team_context}, as {job_source}. With over {years_of_experience} years of experience in {core_expertise}, I possess the expertise necessary to {key_value_proposition}.",
+    "experience_paragraph": "My background is rooted in {main_strength}. I have experience {key_achievement_1} and {key_achievement_2}. As an expert in {expertise_area}, I am skilled in {specific_skills}, directly aligning with your requirements for {job_requirements}. Furthermore, my academic foundation, including a PhD and a Cum Laude MSc from Delft University of Technology, provides the necessary depth in data science and statistical techniques.",
+    "motivation_paragraph": "This role represents my desired next step: {career_aspiration}. My primary motivation is centered on {key_motivation}. I recognize that this role requires {role_characteristics}. My experience in {relevant_experience} prepares me to meet these challenges.",
+    "culture_fit_paragraph": "I am also keenly interested in the environment you describe. {company_culture_alignment}. The description of your team as {team_description} suggests an ideal collaborative atmosphere where I can {contribution_statement}.",
+    "technical_alignment_paragraph": "I am confident that my technical depth in {technical_areas}, deep {cloud_platform} expertise ({specific_tools}), hands-on CI/CD experience with {cicd_tools}, and commitment to engineering excellence will enable me to significantly contribute to {company_initiative}.",
+    "closing_paragraph": "Thank you for considering my application. I look forward to the opportunity to discuss how my vision and experience can support your {organizational_goals}.",
+    "signature": {
+      "regards": "Regards,",
+      "name": "dr. Yanying Gu"
+    }
+  },
+  "alternative_templates": {
+    "opening_paragraph_short": "I am writing to express my strong interest in the {job_title} position at {company_name}, as advertised in {location}. With over {years_of_experience} years of hands-on experience, I possess the deep expertise in {core_competency} that {company_name} seeks.",
+    "experience_paragraph_technical": "My background aligns perfectly with your requirement for {key_requirement}. I have extensively {technical_achievement}, utilizing frameworks like {frameworks}. My expertise extends to leveraging big data frameworks such as {big_data_tools} to construct robust analytical and ML training pipelines.",
+    "closing_paragraph_with_attachment": "I am confident my strategic approach and technical depth will enable me to significantly contribute to {company_name}'s innovative work in {industry}. Please find my resume attached. I would welcome the opportunity to discuss how my experience and vision can support your organization's AI journey."
+  }
+}
+
