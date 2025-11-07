@@ -1,0 +1,109 @@
+{
+  "name": "Load_JD",
+  "nodes": [
+    {
+      "parameters": {
+        "fileSelector": "/data/data/job_description.json",
+        "options": {
+          "mimeType": "application/json"
+        }
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        16
+      ],
+      "id": "8aa1d4f2-ff7d-4d5a-85c1-de536b14e584",
+      "name": "Read/Write Files from Disk",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        0,
+        16
+      ],
+      "id": "ce40132b-3283-4fc1-b3e6-83693ffbef8b",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# get \"data\" from JSON\n\nfor item in _input.all():  # list of input items\n    data = item.get(\"json\", {})   # grab the nested json dict\n    output = data.get(\"data\", \"\")  # now 'output' exists\nreturn output"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        16
+      ],
+      "id": "95ba1335-d07a-44c4-9963-1575e3ecb695",
+      "name": "Code in Python (Beta)"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -352,
+        16
+      ],
+      "id": "9baff72e-4c03-4c4a-a854-d19003fbaef4",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Code in Python (Beta)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "13d0c822-cb89-4c09-a736-3e280c13b598",
+  "meta": {
+    "instanceId": "b39098fa88d73a08861a2351c14a261cf9e6ae11855154e6a59e69c1890b07c6"
+  },
+  "id": "qqI7hVPaeHU4HmVO",
+  "tags": []
+}

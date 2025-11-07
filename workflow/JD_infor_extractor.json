@@ -1,0 +1,174 @@
+{
+  "name": "JD_infor_extractor",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -192,
+        0
+      ],
+      "id": "fd366534-081e-49fd-946d-35e258b90b46",
+      "name": "When chat message received",
+      "webhookId": "d1bdbf79-8e5c-4ac7-96bf-7228d8b7eab8"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an information extraction assistant. Read the job description text provided in the <job_description> section. Respond with a single JSON object using the exact keys below:\n\n{\n  \"job title\": \"\",\n  \"Responsibility\": \"\",\n  \"Required Relevant Experience (Years)\": null,\n  \"Required Seniority Level\": \"\",\n  \"Relevant Field of Study/Major\": \"\",\n  \"Required Language(s) and Proficiency Level\": \"\",\n  \"Specific Required Skills/Keywords\": \"\",\n  \"Target Job Industry/Sector\": \"\",\n  \"Behavioral requirement\": \"\",\n  \"Company Values\": \"\",\n  \"Company name\": \"\"\n}\n\nExtraction guidelines:\n- Preserve bullet content and line breaks where present in the source; use \"\\n\\n\" between bullet sections to mirror paragraphs.\n- If the description lacks information for a field, leave the value as an empty string, and use null for numeric fields when unknown.\n- Normalize counts to integers (e.g., \"7+ years\" → 7). If a range appears, choose the minimum.\n- Keep wording faithful to the source; do not paraphrase unless you must resolve formatting.\n\nReturn only the JSON—no markdown, commentary, or backticks.\n\n<job_description>\n{{ $json.chatInput }}\n</job_description>\n\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        80,
+        0
+      ],
+      "id": "0c504999-35a0-4611-afa4-ea45597dd2d5",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -112,
+        208
+      ],
+      "id": "0bd5a1fc-8b6d-4737-bcbf-fd5940b0fb67",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "4lQiD09ZknJtbyVj",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/data/data/job_description.json",
+        "options": {
+          "append": false
+        }
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        768,
+        0
+      ],
+      "id": "f585fa9c-7cd0-4564-9b2f-718260af3838",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {
+          "fileName": "/data/jd_test.json"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        0
+      ],
+      "id": "2800f97b-3d8f-498d-be89-1d77216d0425",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# item[\"output\"] is a escaped JSON, not a real dictionary\n# JSON data is stored inside a string, not as structured JSON\n# Need to unescape JSON\nimport json\n\nparsed_items = []\n\nfor item in _input.all():  # list of input items\n    data = item.get(\"json\", {})   # grab the nested json dict\n    raw_output = data.get(\"output\", \"\")  # now 'output' exists\n    if not raw_output:\n        parsed_items.append({\"raw_output\": \"MISSING\"})\n        continue\n    try:\n        parsed = json.loads(raw_output)  # convert string to dict\n        parsed_items.append(parsed)\n    except json.JSONDecodeError:\n        parsed_items.append({\"raw_output\": raw_output})\n\n# Return structured JSON back to n8n\nreturn parsed_items\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        384,
+        0
+      ],
+      "id": "f073428a-6659-4c7d-8e52-2344d5f19076",
+      "name": "Code in Python (Beta)"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code in Python (Beta)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in Python (Beta)": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "aa930281-1685-4cc1-aaee-a62ff27b60c7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b39098fa88d73a08861a2351c14a261cf9e6ae11855154e6a59e69c1890b07c6"
+  },
+  "id": "vFkoQtaC3V177bTm",
+  "tags": []
+}

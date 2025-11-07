@@ -125,6 +125,8 @@ n8n provides a visual workflow automation interface with built-in LangChain and 
 # 4. Import workflows from workflow/workflow.json
 ```
 
+When self-hosting n8n on Windows, mount `C:\Users\yanyi\Documents\AI_project\job_agent\` into /data folder in n8n containern, which enable reading prompts and persist generated files from within the container.
+
 ### 2. Using Ollama (Local LLM)
 
 Start the local LLM (qwen3:0.6b) that supports HTTP requests:

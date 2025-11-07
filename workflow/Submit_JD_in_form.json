@@ -1,0 +1,117 @@
+{
+  "name": "Submit_JD_in_form",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "job description",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "job title"
+            },
+            {
+              "fieldLabel": "Responsibility",
+              "fieldType": "textarea"
+            },
+            {
+              "fieldLabel": "Required Relevant Experience (Years)",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Required Seniority Level",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "senior"
+                  },
+                  {
+                    "option": "mid-level"
+                  },
+                  {
+                    "option": "staff/lead"
+                  },
+                  {
+                    "option": "principle"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Relevant Field of Study/Major"
+            },
+            {
+              "fieldLabel": "Required Language(s) and Proficiency Level"
+            },
+            {
+              "fieldLabel": "Specific Required Skills/Keywords",
+              "fieldType": "textarea"
+            },
+            {
+              "fieldLabel": "Target Job Industry/Sector"
+            },
+            {
+              "fieldLabel": "Behavioral requirement",
+              "fieldType": "textarea"
+            },
+            {
+              "fieldLabel": "Company Values",
+              "fieldType": "textarea"
+            },
+            {
+              "fieldLabel": "Company name"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "fa77abf5-7cef-4af3-b15c-5503ed3a1ac5",
+      "name": "On form submission",
+      "webhookId": "008db75c-b0d3-475a-9263-fa55d912c07e"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# TO DO\n# n8n Python Node: Load CV text from a .txt file\n\n# Structured CV Dictionary\ncv_structured = {\n    \"contact\": {\n        \"phone\": \"+316 10 95 27 90\",\n        \"email\": \"yanying.gu@gmail.com\",\n        \"location\": \"Alkmaar (NL)\",\n        \"linkedin\": \"yanying-gu\"\n    },\n    \n    \"competencies\": [\n        \"Creative\",\n        \"Open\",\n        \"Conscientious\",\n        \"Balanced\"\n    ],\n    \n    \"education\": [\n        {\n            \"degree\": \"PhD Wireless and Mobile Communications\",\n            \"field\": \"Electrical Engineering, Mathematics and Computer Science (EEMCS)\",\n            \"institution\": \"Delft University of Technology\",\n            \"period\": \"2006 – 2010\"\n        },\n        {\n            \"degree\": \"MSc Telecommunications\",\n            \"institution\": \"Delft University of Technology\",\n            \"period\": \"2004 – 2006\",\n            \"honors\": \"Cum Laude, graduated with honors, top 5%\"\n        }\n    ],\n    \n    \"skills\": {\n        \"technical\": [\"Machine learning\", \"MLOps\", \"AI\", \"Python\"],\n        \"soft_skills\": [\"Leadership\"]\n    },\n    \n    \"languages\": {\n        \"English\": \"fully professional\",\n        \"Dutch\": \"NT2 P.II diploma\"\n    },\n    \n    \"profile\": \"Experienced AI and Data Science leader with 15 years of success delivering scalable ML solutions on AWS and Azure. Skilled in aligning AI strategy with business goals, leading cross-functional teams, and driving innovation across global organizations.\",\n    \n    \"work_experience\": [\n        {\n            \"title\": \"Senior AI Engineer\",\n            \"company\": \"Ayvens Digital & IT, Société Générale\",\n            \"location\": \"Amsterdam\",\n            \"period\": \"2022 - present\",\n            \"projects\": [\n                {\n                    \"name\": \"SIMS ML in AWS\",\n                    \"description\": \"Situation: The original SIMS V1 system used a rigid rules engine that was difficult to maintain and could not scale with evolving business needs. An intelligent, automated solution was required to improve efficiency and support growth. Action: Led the end-to-end design of a scalable ML decision engine on AWS SageMaker, translating business needs into production-ready models with full lifecycle coverage. Result: The solution was deployed in 6 countries and automated 50% of maintenance approvals, significantly reducing delays, lowering costs, and enhancing system scalability.\"\n                },\n                {\n                    \"name\": \"ML Enhancement in AWS\",\n                    \"description\": \"Situation: The ML pipeline lacked structure—ETL was inconsistently managed with PySpark on SageMaker, training was done through scattered Jupyter notebooks, and CI/CD was fragmented between GitLab and Airflow, creating inefficiencies and team dependencies. Action: Redesigned the ML workflow by migrating ETL to Snowflake with Snowpark, replacing Airflow with SageMaker Pipelines, and automating deployment via GitLab CI/CD. Result: Delivered a robust ML platform with unified data processing, streamlined CI/CD, and significantly reduced time-to-deploy and increased team efficiency.\"\n                },\n                {\n                    \"name\": \"SIMS ML in Azure\",\n                    \"description\": \"Situation: In 2024, the team was downsized from 5 to 2 FTEs, losing key support resources. This required a strategic shift to optimize delivery with fewer resources while maintaining AI output. Action: I implemented a E2E ML solutions in Azure Databricks platform. I managed cross-functional teams to ensure smooth execution. Result: Deployed the first production ML model in Azure using Databricks, Unity catalog, MLflow, and Azure DevOps, laying the groundwork for scalable, Azure-native ML deployments across countries.\"\n                },\n                {\n                    \"name\": \"AI Alex – AI Agent + MCP (Proof of Concept)\",\n                    \"description\": \"Situation: Manual maintenance approvals were inefficient and time-consuming, highlighting the need for an interactive, intelligent system to streamline collaboration with garages and reduce human intervention. Action: I led the development of AI Alex, an AI agent built with LLMs, LangChain, and RAG pipelines using Azure Databricks and integrated with MCP tools. Result: The AI agent and MCP solution were successfully deployed in the staging environment, showcasing their potential to automate and improve the existing manual approval process.\"\n                },\n                {\n                    \"name\": \"Reference Pricing System (RPS) – ML-Driven Vehicle Price Estimation\",\n                    \"description\": \"Situation: Manual vehicle pricing across multiple markets was inefficient, inconsistent, and unable to scale— necessitating an ML-based solution to improve speed and accuracy. Action: I designed and deployed an end-to-end ML system using SageMaker, Airflow, and Snowflake, centered around an XGBoost model. The solution automated pricing based on vehicle and market data, with built-in monitoring and retraining, and was fully integrated into business operations. Result: Now live in 23 countries, the system prices over 15,000 vehicles monthly, reducing manual work by 60% and significantly improving speed and accuracy.\"\n                }\n            ]\n        },\n        {\n            \"title\": \"Data Scientist, MLE\",\n            \"company\": \"LeasePlan Digital & IT\",\n            \"location\": \"Amsterdam\",\n            \"period\": \"2018 - 2022\",\n            \"projects\": [\n                {\n                    \"name\": \"Mileage Prediction – (Keep Me Safely on the Road)\",\n                    \"description\": \"Situation: To enable proactive maintenance, accurate mileage forecasts were needed to identify vehicles approaching service thresholds within a 30-day window. Action: Starting from a business use case, I led the development of a proof of concept and scaled it into a full production-grade E2E ML solution. This included building data and ML pipelines, deploying a daily batch inference pipeline, and integrating it into the maintenance system—along with implementing monitoring and alerting to ensure production reliability. Result: The solution now delivers weekly mileage predictions for ~5 million vehicles with approximately 10% MAPE (Mean Absolute Percentage Error). This significantly improved the accuracy of maintenance planning, enabling timely interventions, reducing unplanned downtime, and enhancing overall fleet safety and operational efficiency.\"\n                }\n            ]\n        },\n        {\n            \"title\": \"Data Scientist\",\n            \"company\": \"KPN\",\n            \"location\": \"Netherlands\",\n            \"period\": \"2017 - 2018\",\n            \"responsibilities\": [\n                \"Internet of Things (IoT) LoRa performance monitoring data analysis\",\n                \"Time series analysis\",\n                \"Machine Learning, Deep learning, neural networks architecture and hyperparameter tuning\",\n                \"Image classification, convolutional neural network (CNN, ConvNet)\",\n                \"Text classification, recurrent neural network (RNN)\",\n                \"Recommendation system\"\n            ],\n            \"technologies\": [\"Python\", \"pandas\", \"numpy\", \"CNN\", \"RNN\", \"IoT\", \"LoRa\"]\n        },\n        {\n            \"title\": \"Big Data Engineer, Architect\",\n            \"company\": \"KPN Business Operation, Big Data Team\",\n            \"location\": \"Den Haag\",\n            \"period\": \"2016 - 2017\",\n            \"responsibilities\": [\n                \"Data governance\",\n                \"Big Data solutions\",\n                \"Hadoop systems\",\n                \"Data management\"\n            ],\n            \"technologies\": [\"Hadoop\", \"Atlas\", \"Ranger\", \"Hive\"]\n        },\n        {\n            \"title\": \"Project Manager and Innovator\",\n            \"company\": \"KPN Mobile Innovation Voice & Signaling\",\n            \"location\": \"Den Haag\",\n            \"period\": \"2010 - 2016\",\n            \"responsibilities\": [\n                \"Relational database and relational data modelling\",\n                \"LTE/4G and roaming\",\n                \"MVNO\",\n                \"Diameter signaling\"\n            ]\n        }\n    ],\n    \n    \"years_of_experience\": 15,\n    \"specializations\": [\n        \"AI\",\n        \"Machine Learning\",\n        \"MLOps\",\n        \"AWS\",\n        \"Azure\",\n        \"Leadership\"\n    ]\n}\n\ncv_text = \"\"\"\nCONTACT \n\n+316 10 95 27 90 \n\nyanying.gu@gmail.com \n\nAlkmaar (NL) \n\nLinkedIn yanying-gu \n\n  \n\nCOMPETENCIES \n\nCreative \n\nOpen \n\nConscientious \n\nBalanced \n\n  \n\nEDUCATION \n\nPhD Wireless and Mobile Communications \n\nElectrical Engineering, Mathematics and Computer Science (EEMCS)   \n\nDelft University of Technology \n\n2006 – 2010 \n\n  \n\nMSc Telecommunications \n\nDelft University of Technology 2004 – 2006 \n\nCum Laude, graduated with honors, top 5% \n\n  \n\nSKILLS \n\nMachine learning \n\nMLOps \n\nAI \n\nProgramming: Python \n\nLeadership \n\n  \n\nLANGUAGES \n\nEnglish – fully professional \n\nDutch – NT2 P.II diploma \n\n  \n\n \n\n \n\n \n\nPROFILE \n\n  \n\nExperienced AI and Data Science leader with 15 years of success delivering scalable ML solutions on AWS and Azure. Skilled in aligning AI strategy with business goals, leading cross-functional teams, and driving innovation across global organizations. \n\n  \n\nRECENT WORK EXPERIENCE \n\n  \n\nSenior AI Engineer\t\t\t\t \n\nAyvens Digital & IT, Société Générale, Amsterdam \n\n2022 - present \n\n \n\n  \n\nProject: SIMS ML in AWS \n\nSituation: The original SIMS V1 system used a rigid rules engine that was difficult to maintain and could not scale with evolving business needs. An intelligent, automated solution was required to improve efficiency and support growth. \n\nAction: Led the end-to-end design of a scalable ML decision engine on AWS SageMaker, translating business needs into production-ready models with full lifecycle coverage \n\nResult: The solution was deployed in 6 countries and automated 50% of maintenance approvals, significantly reducing delays, lowering costs, and enhancing system scalability. \n\nProject: ML Enhancement in AWS \n\nSituation: The ML pipeline lacked structure—ETL was inconsistently managed with PySpark on SageMaker, training was done through scattered Jupyter notebooks, and CI/CD was fragmented between GitLab and Airflow, creating inefficiencies and team dependencies. \n\nAction: Redesigned the ML workflow by migrating ETL to Snowflake with Snowpark, replacing Airflow with SageMaker Pipelines, and automating deployment via GitLab CI/CD. \n\nResult: Delivered a robust ML platform with unified data processing, streamlined CI/CD, and significantly reduced time-to-deploy and increased team efficiency. \n\n  \n\nProject: SIMS ML in Azure \n\nSituation: In 2024, the team was downsized from 5 to 2 FTEs, losing key support resources. This required a strategic shift to optimize delivery with fewer resources while maintaining AI output. \n\nAction: I implemented a E2E ML solutions in Azure Databricks platform. I managed cross-functional teams to ensure smooth execution. \n\nResult: Deployed the first production ML model in Azure using Databricks, Unity catalog, MLflow, and Azure DevOps, laying the groundwork for scalable, Azure-native ML deployments across countries. \n\n \n\nProject: AI Alex – AI Agent + MCP (Proof of Concept)  \n\n• Situation: Manual maintenance approvals were inefficient and time-consuming, highlighting the need for an interactive, intelligent system to streamline collaboration with garages and reduce human intervention.  \n\n• Action: I led the development of AI Alex, an AI agent built with LLMs, LangChain, and RAG pipelines using Azure Databricks and integrated with MCP tools.  \n\n• Result: The AI agent and MCP solution were successfully deployed in the staging environment, showcasing their potential to automate and improve the existing manual approval process.  \n\nProject: Reference Pricing System (RPS) – ML-Driven Vehicle Price Estimation  \n\n• Situation: Manual vehicle pricing across multiple markets was inefficient, inconsistent, and unable to scale— necessitating an ML-based solution to improve speed and accuracy. • Action: I designed and deployed an end-to-end ML system using SageMaker, Airflow, and Snowflake, centered around an XGBoost model. The solution automated pricing based on vehicle and market data, with built-in monitoring and retraining, and was fully integrated into business operations.  \n\n• Result: Now live in 23 countries, the system prices over 15,000 vehicles monthly, reducing manual work by 60% and significantly improving speed and accuracy.  \n\n \n\nData Scientist, MLE  \n\nLeasePlan Digital & IT, Amsterdam   \n\n2018 - 2022 \n\nProject: Mileage Prediction – (Keep Me Safely on the Road)  \n\n• Situation: To enable proactive maintenance, accurate mileage forecasts were needed to identify vehicles approaching service thresholds within a 30-day window.  \n\n• Action: Starting from a business use case, I led the development of a proof of concept and scaled it into a full production-grade E2E ML solution. This included building data and ML pipelines, deploying a daily batch inference pipeline, and integrating it into the maintenance system—along with implementing monitoring and alerting to ensure production reliability.  \n\n• Result: The solution now delivers weekly mileage predictions for ~5 million vehicles with approximately 10% MAPE (Mean Absolute Percentage Error). This significantly improved the accuracy of maintenance planning, enabling timely interventions, reducing unplanned downtime, and enhancing overall fleet safety and operational efficiency.  \n\nData Scientist KPN 2017 - 2018  \n\n• Internet of Things (IoT) LoRa performance monitoring data analysis, Time series analysis, Python, pandas, numpy.  \n\n• Machine Learning, Deep learning, neural networks architecture and hyperparameter tuning • Image classification, convolutional neural network (CNN, ConvNet)  \n\n• Test classification, recurrent neural network (RNN)  \n\n• Recommendation system  \n\n \n\nBig Data Engineer, Architect  \n\nKPN Business Operation, Big Data Team, Den Haag  \n\n2016 - 2017 \n\n• Data governance, Big Data solutions, Hadoop systems, Data management, Atlas, Ranger, Hive, etc.  \n\n \n\nProject Manager and Innovator  \n\nKPN Mobile Innovation Voice & Signaling, Den Haag  \n\n2010 - 2016 \n\n• Relational database and relational data modelling   \n\n• LTE/4G and roaming, MVNO, Diameter signaling \n\n\n\"\"\"\n\nmotivation_letter = {\n  \"contact_header\": {\n    \"name\": \"Yanying Gu\",\n    \"address\": \"Vijzelstraat 22, 1825KT, Alkmaar\",\n    \"phone\": \"+31610952790\",\n    \"email\": \"Yanying.gu@gmail.com\"\n  },\n  \"template_sections\": {\n    \"greeting\": {\n      \"formal\": \"Dear Sir or Madam,\",\n      \"with_name\": \"Dear Mr./Ms. {hiring_manager_name},\"\n    },\n    \"opening_paragraph\": \"I am writing to express my {interest_level} interest in the {job_title} position {team_context}, as {job_source}. With over {years_of_experience} years of experience in {core_expertise}, I possess the expertise necessary to {key_value_proposition}.\",\n    \"experience_paragraph\": \"My background is rooted in {main_strength}. I have experience {key_achievement_1} and {key_achievement_2}. As an expert in {expertise_area}, I am skilled in {specific_skills}, directly aligning with your requirements for {job_requirements}. Furthermore, my academic foundation, including a PhD and a Cum Laude MSc from Delft University of Technology, provides the necessary depth in data science and statistical techniques.\",\n    \"motivation_paragraph\": \"This role represents my desired next step: {career_aspiration}. My primary motivation is centered on {key_motivation}. I recognize that this role requires {role_characteristics}. My experience in {relevant_experience} prepares me to meet these challenges.\",\n    \"culture_fit_paragraph\": \"I am also keenly interested in the environment you describe. {company_culture_alignment}. The description of your team as {team_description} suggests an ideal collaborative atmosphere where I can {contribution_statement}.\",\n    \"technical_alignment_paragraph\": \"I am confident that my technical depth in {technical_areas}, deep {cloud_platform} expertise ({specific_tools}), hands-on CI/CD experience with {cicd_tools}, and commitment to engineering excellence will enable me to significantly contribute to {company_initiative}.\",\n    \"closing_paragraph\": \"Thank you for considering my application. I look forward to the opportunity to discuss how my vision and experience can support your {organizational_goals}.\",\n    \"signature\": {\n      \"regards\": \"Regards,\",\n      \"name\": \"dr. Yanying Gu\"\n    }\n  },\n  \"alternative_templates\": {\n    \"opening_paragraph_short\": \"I am writing to express my strong interest in the {job_title} position at {company_name}, as advertised in {location}. With over {years_of_experience} years of hands-on experience, I possess the deep expertise in {core_competency} that {company_name} seeks.\",\n    \"experience_paragraph_technical\": \"My background aligns perfectly with your requirement for {key_requirement}. I have extensively {technical_achievement}, utilizing frameworks like {frameworks}. My expertise extends to leveraging big data frameworks such as {big_data_tools} to construct robust analytical and ML training pipelines.\",\n    \"closing_paragraph_with_attachment\": \"I am confident my strategic approach and technical depth will enable me to significantly contribute to {company_name}'s innovative work in {industry}. Please find my resume attached. I would welcome the opportunity to discuss how my experience and vision can support your organization's AI journey.\"\n  }\n}\n\noutput_items = []\n\n# Loop through all input items (from Form Trigger)\nfor item in items:\n  # Copy the JSON from the Form Trigger\n  json_data = dict(item['json'])\n\n# Add cv_structured to the same JSON object\njson_data['cv_structured'] = cv_structured    \n\n# Add motivation_letter\njson_data['motivation_letter'] = motivation_letter \n\n# json_data['Load_from_container'] = items[-1][\"json\"]\n\noutput_items.append({\"json\": json_data})\n\nreturn output_items\n\n# import base64\n\n# # Get the binary data from the previous node\n# binary_data = item['binary']['data']['data']\n\n# # Decode the base64 data\n# decoded_data = base64.b64decode(binary_data).decode('utf-8')\n\n# # Parse the JSON\n# json_data = json.loads(decoded_data)\n\n# Now you can work with your JSON data\n# return json_data\n# return items\n\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "id": "2393a465-8208-4c8f-95f7-c3a8ac0c44be",
+      "name": "Code in Python (Beta)"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Code in Python (Beta)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e37034d3-9a18-48ae-81c8-ab135180e868",
+  "meta": {
+    "instanceId": "b39098fa88d73a08861a2351c14a261cf9e6ae11855154e6a59e69c1890b07c6"
+  },
+  "id": "sfd8YPtHwyNHB7Aq",
+  "tags": []
+}

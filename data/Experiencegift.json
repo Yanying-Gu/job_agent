@@ -1,0 +1,16 @@
+[
+    {
+        "job title": "Data & AI Engineer",
+        "Responsibility": "Translating ambitious concepts and ideas into scalable backend and data systems.\n\nDesigning, implementing, and maintaining robust data flows and storage systems across a variety of databases.\n\nPrototyping and validating AI concepts, from quick experiments to production-ready integrations.\n\nDeveloping and evolving data-powered services in Python.\n\nCollaborating closely with other engineers to bring bold ideas to life.",
+        "Required Relevant Experience (Years)": null,
+        "Required Seniority Level": "",
+        "Relevant Field of Study/Major": "",
+        "Required Language(s) and Proficiency Level": "Fluency in English.",
+        "Specific Required Skills/Keywords": "Ability to design and reason about software.\n\nStrong analytical and learning ability: you pick up complex ideas fast and apply them meaningfully.\n\nOwnership and drive: you learn, build, and deliver independently.\n\nAI & Data Science: Recommender systems, natural language processing, machine learning, and data-driven experimentation.\n\nLLM-based systems: Model Context Protocol (MCP), LangChain, LangGraph, and AI-tools.\n\nBackend Engineering: Programming (Python), Backend Frameworks (FastAPI), Object Relational Mappers (SQLAlchemy), Database Migrations (Alembic).\n\nLarge-scale databases: OLTP (PostgreSQL), OLAP (ClickHouse), key–value stores (Redis), document stores (MongoDB), vector stores (PgVector, Pinecone), search systems (Elasticsearch/OpenSearch).\n\nDistributed task processing and orchestration (Celery, Redis).\n\nETL/ELT pipelines and data modelling.\n\nCloud Infrastructure: Docker, Kubernetes, AWS.",
+        "Target Job Industry/Sector": "Travel technology / Scale-up technology company",
+        "Behavioral requirement": "Learn new technologies faster than most can explain them.\n\nBuild software because you love creating things that work beautifully.\n\nThink deeply about architecture, abstraction, and efficiency.\n\nCommunicate clearly and decisively.\n\nDeliver independently, even under ambiguity.\n\nOwnership and drive.\n\nIntellect, discipline, and perseverance.",
+        "Company Values": "We believe in experiences over things.\n\nA culture that rewards initiative, deep thinking, and craftsmanship.\n\nFreedom to come up with new ideas and initiatives.\n\nCreative, dynamic, and innovative environment empowering people for unlimited success.",
+        "Company name": "Experiencegift"
+    }
+      
+]
