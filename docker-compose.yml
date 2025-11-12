@@ -1,0 +1,23 @@
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    # build: . # Docker builts the image from your Dockerfile in the same folder
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_COMMUNITY_PACKAGES_ENABLED=true
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - C:\Users\yanyi\Documents\AI_project\job_agent\data:/job_agent_data
+
+volumes:
+  n8n_data:
+    external:
+      # Compose maps exactly to the volume name in the docker-compose.yml file  (n8n_data)
+      name: n8n_data
+  job_agent_data:
+    external:
+      # Compose maps exactly to the volume name in the docker-compose.yml file (job_agent_data)
+      name: job_agent_data
+
