@@ -3,82 +3,8 @@
   "nodes": [
     {
       "parameters": {
-        "formTitle": "job description",
-        "formFields": {
-          "values": [
-            {
-              "fieldLabel": "job title"
-            },
-            {
-              "fieldLabel": "Responsibility",
-              "fieldType": "textarea"
-            },
-            {
-              "fieldLabel": "Required Relevant Experience (Years)",
-              "fieldType": "number"
-            },
-            {
-              "fieldLabel": "Required Seniority Level",
-              "fieldType": "radio",
-              "fieldOptions": {
-                "values": [
-                  {
-                    "option": "senior"
-                  },
-                  {
-                    "option": "mid-level"
-                  },
-                  {
-                    "option": "staff/lead"
-                  },
-                  {
-                    "option": "principle"
-                  }
-                ]
-              }
-            },
-            {
-              "fieldLabel": "Relevant Field of Study/Major"
-            },
-            {
-              "fieldLabel": "Required Language(s) and Proficiency Level"
-            },
-            {
-              "fieldLabel": "Specific Required Skills/Keywords",
-              "fieldType": "textarea"
-            },
-            {
-              "fieldLabel": "Target Job Industry/Sector"
-            },
-            {
-              "fieldLabel": "Behavioral requirement",
-              "fieldType": "textarea"
-            },
-            {
-              "fieldLabel": "Company Values",
-              "fieldType": "textarea"
-            },
-            {
-              "fieldLabel": "Company name"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.formTrigger",
-      "typeVersion": 2.3,
-      "position": [
-        -224,
-        0
-      ],
-      "id": "1f16fa74-8964-4869-9dc7-0a37397810a9",
-      "name": "On form submission",
-      "webhookId": "008db75c-b0d3-475a-9263-fa55d912c07e"
-    },
-    {
-      "parameters": {
         "promptType": "define",
-        "text": "=You are a professional resume assistant.\nCall the update cv agent\nuse {{ $json[\"Responsibility\"] }} to update {{ $json[\"cv_structured\"] }}\nif you get updated cv from update cv agent, give output ok ",
+        "text": "=You are a professional resume assistant.\nCall the update cv agent\nuse {{ $json[\"Company name\"] }} and {{ $json[\"job title\"] }} to update {{ $json[\"motivation_letter\"] }}\nif you get updated cv from update cv agent, give output ok \n\nYou are a professional CV and cover letter optimization expert.\n\nTASK: generate a personalized motivation letter based on a job description.\n\nINPUTS:\n- Target job information \n- motivation Letter template: {{ $json[\"motivation_letter\"] }}\n\nINSTRUCTIONS:\n\n\nSTEP 1: Generate Motivation Letter  \n- Use {{ $json[\"Company name\"]}} and {{ $json[\"job title\"]}} from job description\n- Use motivation letter_template sections as the structure\n- Fill in all {placeholders} with information from job description and cv\n- Reference 2-3 of the matched projects in the letter\n- Ensure the letter is personalized and natural (300-400 words)\n\nSTEP 2: Return Results for Manual Review\nOutput your results in this JSON format:\n\n{\n  \"motivation_letter\": {\n    \"full_text\": \"Complete motivation letter text\"\n  }\n}\n\nIMPORTANT: Never fabricate information. Only reframe existing CV content. Output is for manual review and approval before use.\n",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -102,8 +28,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        -336,
-        192
+        944,
+        240
       ],
       "id": "32a0f50c-d301-414b-ab71-46cbcdcbffe6",
       "name": "OpenAI Chat Model",
@@ -113,20 +39,6 @@
           "name": "OpenAi account"
         }
       }
-    },
-    {
-      "parameters": {
-        "language": "python",
-        "pythonCode": "# TO DO\n# n8n Python Node: Load CV text from a .txt file\n\n# Structured CV Dictionary\ncv_structured = {\n    \"contact\": {\n        \"phone\": \"+316 10 95 27 90\",\n        \"email\": \"yanying.gu@gmail.com\",\n        \"location\": \"Alkmaar (NL)\",\n        \"linkedin\": \"yanying-gu\"\n    },\n    \n    \"competencies\": [\n        \"Creative\",\n        \"Open\",\n        \"Conscientious\",\n        \"Balanced\"\n    ],\n    \n    \"education\": [\n        {\n            \"degree\": \"PhD Wireless and Mobile Communications\",\n            \"field\": \"Electrical Engineering, Mathematics and Computer Science (EEMCS)\",\n            \"institution\": \"Delft University of Technology\",\n            \"period\": \"2006 – 2010\"\n        },\n        {\n            \"degree\": \"MSc Telecommunications\",\n            \"institution\": \"Delft University of Technology\",\n            \"period\": \"2004 – 2006\",\n            \"honors\": \"Cum Laude, graduated with honors, top 5%\"\n        }\n    ],\n    \n    \"skills\": {\n        \"technical\": [\"Machine learning\", \"MLOps\", \"AI\", \"Python\"],\n        \"soft_skills\": [\"Leadership\"]\n    },\n    \n    \"languages\": {\n        \"English\": \"fully professional\",\n        \"Dutch\": \"NT2 P.II diploma\"\n    },\n    \n    \"profile\": \"Experienced AI and Data Science leader with 15 years of success delivering scalable ML solutions on AWS and Azure. Skilled in aligning AI strategy with business goals, leading cross-functional teams, and driving innovation across global organizations.\",\n    \n    \"work_experience\": [\n        {\n            \"title\": \"Senior AI Engineer\",\n            \"company\": \"Ayvens Digital & IT, Société Générale\",\n            \"location\": \"Amsterdam\",\n            \"period\": \"2022 - present\",\n            \"projects\": [\n                {\n                    \"name\": \"SIMS ML in AWS\",\n                    \"description\": \"Situation: The original SIMS V1 system used a rigid rules engine that was difficult to maintain and could not scale with evolving business needs. An intelligent, automated solution was required to improve efficiency and support growth. Action: Led the end-to-end design of a scalable ML decision engine on AWS SageMaker, translating business needs into production-ready models with full lifecycle coverage. Result: The solution was deployed in 6 countries and automated 50% of maintenance approvals, significantly reducing delays, lowering costs, and enhancing system scalability.\"\n                },\n                {\n                    \"name\": \"ML Enhancement in AWS\",\n                    \"description\": \"Situation: The ML pipeline lacked structure—ETL was inconsistently managed with PySpark on SageMaker, training was done through scattered Jupyter notebooks, and CI/CD was fragmented between GitLab and Airflow, creating inefficiencies and team dependencies. Action: Redesigned the ML workflow by migrating ETL to Snowflake with Snowpark, replacing Airflow with SageMaker Pipelines, and automating deployment via GitLab CI/CD. Result: Delivered a robust ML platform with unified data processing, streamlined CI/CD, and significantly reduced time-to-deploy and increased team efficiency.\"\n                },\n                {\n                    \"name\": \"SIMS ML in Azure\",\n                    \"description\": \"Situation: In 2024, the team was downsized from 5 to 2 FTEs, losing key support resources. This required a strategic shift to optimize delivery with fewer resources while maintaining AI output. Action: I implemented a E2E ML solutions in Azure Databricks platform. I managed cross-functional teams to ensure smooth execution. Result: Deployed the first production ML model in Azure using Databricks, Unity catalog, MLflow, and Azure DevOps, laying the groundwork for scalable, Azure-native ML deployments across countries.\"\n                },\n                {\n                    \"name\": \"AI Alex – AI Agent + MCP (Proof of Concept)\",\n                    \"description\": \"Situation: Manual maintenance approvals were inefficient and time-consuming, highlighting the need for an interactive, intelligent system to streamline collaboration with garages and reduce human intervention. Action: I led the development of AI Alex, an AI agent built with LLMs, LangChain, and RAG pipelines using Azure Databricks and integrated with MCP tools. Result: The AI agent and MCP solution were successfully deployed in the staging environment, showcasing their potential to automate and improve the existing manual approval process.\"\n                },\n                {\n                    \"name\": \"Reference Pricing System (RPS) – ML-Driven Vehicle Price Estimation\",\n                    \"description\": \"Situation: Manual vehicle pricing across multiple markets was inefficient, inconsistent, and unable to scale— necessitating an ML-based solution to improve speed and accuracy. Action: I designed and deployed an end-to-end ML system using SageMaker, Airflow, and Snowflake, centered around an XGBoost model. The solution automated pricing based on vehicle and market data, with built-in monitoring and retraining, and was fully integrated into business operations. Result: Now live in 23 countries, the system prices over 15,000 vehicles monthly, reducing manual work by 60% and significantly improving speed and accuracy.\"\n                }\n            ]\n        },\n        {\n            \"title\": \"Data Scientist, MLE\",\n            \"company\": \"LeasePlan Digital & IT\",\n            \"location\": \"Amsterdam\",\n            \"period\": \"2018 - 2022\",\n            \"projects\": [\n                {\n                    \"name\": \"Mileage Prediction – (Keep Me Safely on the Road)\",\n                    \"description\": \"Situation: To enable proactive maintenance, accurate mileage forecasts were needed to identify vehicles approaching service thresholds within a 30-day window. Action: Starting from a business use case, I led the development of a proof of concept and scaled it into a full production-grade E2E ML solution. This included building data and ML pipelines, deploying a daily batch inference pipeline, and integrating it into the maintenance system—along with implementing monitoring and alerting to ensure production reliability. Result: The solution now delivers weekly mileage predictions for ~5 million vehicles with approximately 10% MAPE (Mean Absolute Percentage Error). This significantly improved the accuracy of maintenance planning, enabling timely interventions, reducing unplanned downtime, and enhancing overall fleet safety and operational efficiency.\"\n                }\n            ]\n        },\n        {\n            \"title\": \"Data Scientist\",\n            \"company\": \"KPN\",\n            \"location\": \"Netherlands\",\n            \"period\": \"2017 - 2018\",\n            \"responsibilities\": [\n                \"Internet of Things (IoT) LoRa performance monitoring data analysis\",\n                \"Time series analysis\",\n                \"Machine Learning, Deep learning, neural networks architecture and hyperparameter tuning\",\n                \"Image classification, convolutional neural network (CNN, ConvNet)\",\n                \"Text classification, recurrent neural network (RNN)\",\n                \"Recommendation system\"\n            ],\n            \"technologies\": [\"Python\", \"pandas\", \"numpy\", \"CNN\", \"RNN\", \"IoT\", \"LoRa\"]\n        },\n        {\n            \"title\": \"Big Data Engineer, Architect\",\n            \"company\": \"KPN Business Operation, Big Data Team\",\n            \"location\": \"Den Haag\",\n            \"period\": \"2016 - 2017\",\n            \"responsibilities\": [\n                \"Data governance\",\n                \"Big Data solutions\",\n                \"Hadoop systems\",\n                \"Data management\"\n            ],\n            \"technologies\": [\"Hadoop\", \"Atlas\", \"Ranger\", \"Hive\"]\n        },\n        {\n            \"title\": \"Project Manager and Innovator\",\n            \"company\": \"KPN Mobile Innovation Voice & Signaling\",\n            \"location\": \"Den Haag\",\n            \"period\": \"2010 - 2016\",\n            \"responsibilities\": [\n                \"Relational database and relational data modelling\",\n                \"LTE/4G and roaming\",\n                \"MVNO\",\n                \"Diameter signaling\"\n            ]\n        }\n    ],\n    \n    \"years_of_experience\": 15,\n    \"specializations\": [\n        \"AI\",\n        \"Machine Learning\",\n        \"MLOps\",\n        \"AWS\",\n        \"Azure\",\n        \"Leadership\"\n    ]\n}\n\ncv_text = \"\"\"\nCONTACT \n\n+316 10 95 27 90 \n\nyanying.gu@gmail.com \n\nAlkmaar (NL) \n\nLinkedIn yanying-gu \n\n  \n\nCOMPETENCIES \n\nCreative \n\nOpen \n\nConscientious \n\nBalanced \n\n  \n\nEDUCATION \n\nPhD Wireless and Mobile Communications \n\nElectrical Engineering, Mathematics and Computer Science (EEMCS)   \n\nDelft University of Technology \n\n2006 – 2010 \n\n  \n\nMSc Telecommunications \n\nDelft University of Technology 2004 – 2006 \n\nCum Laude, graduated with honors, top 5% \n\n  \n\nSKILLS \n\nMachine learning \n\nMLOps \n\nAI \n\nProgramming: Python \n\nLeadership \n\n  \n\nLANGUAGES \n\nEnglish – fully professional \n\nDutch – NT2 P.II diploma \n\n  \n\n \n\n \n\n \n\nPROFILE \n\n  \n\nExperienced AI and Data Science leader with 15 years of success delivering scalable ML solutions on AWS and Azure. Skilled in aligning AI strategy with business goals, leading cross-functional teams, and driving innovation across global organizations. \n\n  \n\nRECENT WORK EXPERIENCE \n\n  \n\nSenior AI Engineer\t\t\t\t \n\nAyvens Digital & IT, Société Générale, Amsterdam \n\n2022 - present \n\n \n\n  \n\nProject: SIMS ML in AWS \n\nSituation: The original SIMS V1 system used a rigid rules engine that was difficult to maintain and could not scale with evolving business needs. An intelligent, automated solution was required to improve efficiency and support growth. \n\nAction: Led the end-to-end design of a scalable ML decision engine on AWS SageMaker, translating business needs into production-ready models with full lifecycle coverage \n\nResult: The solution was deployed in 6 countries and automated 50% of maintenance approvals, significantly reducing delays, lowering costs, and enhancing system scalability. \n\nProject: ML Enhancement in AWS \n\nSituation: The ML pipeline lacked structure—ETL was inconsistently managed with PySpark on SageMaker, training was done through scattered Jupyter notebooks, and CI/CD was fragmented between GitLab and Airflow, creating inefficiencies and team dependencies. \n\nAction: Redesigned the ML workflow by migrating ETL to Snowflake with Snowpark, replacing Airflow with SageMaker Pipelines, and automating deployment via GitLab CI/CD. \n\nResult: Delivered a robust ML platform with unified data processing, streamlined CI/CD, and significantly reduced time-to-deploy and increased team efficiency. \n\n  \n\nProject: SIMS ML in Azure \n\nSituation: In 2024, the team was downsized from 5 to 2 FTEs, losing key support resources. This required a strategic shift to optimize delivery with fewer resources while maintaining AI output. \n\nAction: I implemented a E2E ML solutions in Azure Databricks platform. I managed cross-functional teams to ensure smooth execution. \n\nResult: Deployed the first production ML model in Azure using Databricks, Unity catalog, MLflow, and Azure DevOps, laying the groundwork for scalable, Azure-native ML deployments across countries. \n\n \n\nProject: AI Alex – AI Agent + MCP (Proof of Concept)  \n\n• Situation: Manual maintenance approvals were inefficient and time-consuming, highlighting the need for an interactive, intelligent system to streamline collaboration with garages and reduce human intervention.  \n\n• Action: I led the development of AI Alex, an AI agent built with LLMs, LangChain, and RAG pipelines using Azure Databricks and integrated with MCP tools.  \n\n• Result: The AI agent and MCP solution were successfully deployed in the staging environment, showcasing their potential to automate and improve the existing manual approval process.  \n\nProject: Reference Pricing System (RPS) – ML-Driven Vehicle Price Estimation  \n\n• Situation: Manual vehicle pricing across multiple markets was inefficient, inconsistent, and unable to scale— necessitating an ML-based solution to improve speed and accuracy. • Action: I designed and deployed an end-to-end ML system using SageMaker, Airflow, and Snowflake, centered around an XGBoost model. The solution automated pricing based on vehicle and market data, with built-in monitoring and retraining, and was fully integrated into business operations.  \n\n• Result: Now live in 23 countries, the system prices over 15,000 vehicles monthly, reducing manual work by 60% and significantly improving speed and accuracy.  \n\n \n\nData Scientist, MLE  \n\nLeasePlan Digital & IT, Amsterdam   \n\n2018 - 2022 \n\nProject: Mileage Prediction – (Keep Me Safely on the Road)  \n\n• Situation: To enable proactive maintenance, accurate mileage forecasts were needed to identify vehicles approaching service thresholds within a 30-day window.  \n\n• Action: Starting from a business use case, I led the development of a proof of concept and scaled it into a full production-grade E2E ML solution. This included building data and ML pipelines, deploying a daily batch inference pipeline, and integrating it into the maintenance system—along with implementing monitoring and alerting to ensure production reliability.  \n\n• Result: The solution now delivers weekly mileage predictions for ~5 million vehicles with approximately 10% MAPE (Mean Absolute Percentage Error). This significantly improved the accuracy of maintenance planning, enabling timely interventions, reducing unplanned downtime, and enhancing overall fleet safety and operational efficiency.  \n\nData Scientist KPN 2017 - 2018  \n\n• Internet of Things (IoT) LoRa performance monitoring data analysis, Time series analysis, Python, pandas, numpy.  \n\n• Machine Learning, Deep learning, neural networks architecture and hyperparameter tuning • Image classification, convolutional neural network (CNN, ConvNet)  \n\n• Test classification, recurrent neural network (RNN)  \n\n• Recommendation system  \n\n \n\nBig Data Engineer, Architect  \n\nKPN Business Operation, Big Data Team, Den Haag  \n\n2016 - 2017 \n\n• Data governance, Big Data solutions, Hadoop systems, Data management, Atlas, Ranger, Hive, etc.  \n\n \n\nProject Manager and Innovator  \n\nKPN Mobile Innovation Voice & Signaling, Den Haag  \n\n2010 - 2016 \n\n• Relational database and relational data modelling   \n\n• LTE/4G and roaming, MVNO, Diameter signaling \n\n\n\"\"\"\n\noutput_items = []\n\n# Loop through all input items (from Form Trigger)\nfor item in items:\n  # Copy the JSON from the Form Trigger\n  json_data = dict(item['json'])\n    \n  # Optionally add extra keys\n  # json_data['cv_text'] = cv_text\n    \n  output_items.append({\"json\": json_data})\n\n# Add cv_structured to the same JSON object\njson_data['cv_structured'] = cv_structured    \noutput_items.append({\"json\": json_data})\n\n# Add cv_text to output\n# output_items.append({\"json\":  {\"cv_text\": cv_text}})\n\nreturn output_items\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        16,
-        0
-      ],
-      "id": "b20cdfa0-2754-456d-9a68-1f9ceecb2aa7",
-      "name": "Code in Python (Beta)"
     },
     {
       "parameters": {
@@ -147,8 +59,9 @@
       "parameters": {
         "model": {
           "__rl": true,
+          "value": "gpt-4.1-mini",
           "mode": "list",
-          "value": "gpt-4.1-mini"
+          "cachedResultName": "gpt-4.1-mini"
         },
         "options": {}
       },
@@ -174,8 +87,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmOpenHuggingFaceInference",
       "typeVersion": 1,
       "position": [
-        -160,
-        208
+        944,
+        64
       ],
       "id": "e1848d95-bae6-4fe9-920f-fa6df2b0bcdd",
       "name": "Hugging Face Inference Model",
@@ -194,7 +107,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
       "typeVersion": 1,
       "position": [
-        128,
+        272,
         208
       ],
       "id": "9ba99a7b-5296-4f2d-97b7-df3501ab0918",
@@ -205,21 +118,50 @@
           "name": "Ollama account 2"
         }
       }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        224
+      ],
+      "id": "935b78fd-04f2-4ac6-a7b4-de96c6dd9927",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "qqI7hVPaeHU4HmVO",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/qqI7hVPaeHU4HmVO"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -208,
+        224
+      ],
+      "id": "02c080cf-f444-4c97-a309-1f7ea6ec9837",
+      "name": "Call 'Load JD'"
     }
   ],
   "pinData": {},
   "connections": {
-    "On form submission": {
-      "main": [
-        [
-          {
-            "node": "Code in Python (Beta)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "OpenAI Chat Model": {
       "ai_languageModel": [
         []
@@ -228,17 +170,6 @@
     "AI Agent": {
       "main": [
         []
-      ]
-    },
-    "Code in Python (Beta)": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
       ]
     },
     "Update CV": {
@@ -273,13 +204,35 @@
           }
         ]
       ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Call 'Load JD'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Load JD'": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "98481978-a6e7-49cd-a5e4-a257d2922d87",
+  "versionId": "b5e7847c-64d6-462b-ae97-0dd7414d72f0",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "b39098fa88d73a08861a2351c14a261cf9e6ae11855154e6a59e69c1890b07c6"
