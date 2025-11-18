@@ -1,9 +1,9 @@
 {
-  "name": "Load_JD",
+  "name": "Load_cv",
   "nodes": [
     {
       "parameters": {
-        "fileSelector": "/job_agent_data/job_description.json",
+        "fileSelector": "/job_agent_data/cv_template.json",
         "options": {
           "mimeType": "application/json"
         }
@@ -11,10 +11,10 @@
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1,
       "position": [
-        -192,
-        16
+        896,
+        -48
       ],
-      "id": "8aa1d4f2-ff7d-4d5a-85c1-de536b14e584",
+      "id": "0a022f19-f989-43cb-a03a-8a2795f9ad08",
       "name": "Read/Write Files from Disk",
       "alwaysOutputData": true
     },
@@ -26,10 +26,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        0,
-        16
+        1088,
+        -48
       ],
-      "id": "ce40132b-3283-4fc1-b3e6-83693ffbef8b",
+      "id": "9f999dc3-7f1f-4d53-889d-e419f6ef257a",
       "name": "Extract from File"
     },
     {
@@ -40,10 +40,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        208,
-        16
+        1296,
+        -48
       ],
-      "id": "95ba1335-d07a-44c4-9963-1575e3ecb695",
+      "id": "563a7e93-9400-4064-8832-8241d3e0cc92",
       "name": "Code in Python (Beta)"
     },
     {
@@ -53,10 +53,10 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -352,
-        16
+        736,
+        -48
       ],
-      "id": "9baff72e-4c03-4c4a-a854-d19003fbaef4",
+      "id": "e45da4a5-f0fa-4616-9a0a-ea1ccc93db3b",
       "name": "When Executed by Another Workflow"
     }
   ],
@@ -100,10 +100,10 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "9f4ba5a2-01dc-4160-8f2a-d806990ea53b",
+  "versionId": "a5b9c47b-24a4-49b5-8876-ea24ae6bd9f0",
   "meta": {
     "instanceId": "b39098fa88d73a08861a2351c14a261cf9e6ae11855154e6a59e69c1890b07c6"
   },
-  "id": "qqI7hVPaeHU4HmVO",
+  "id": "PVWIW1TzkHvmqtT4",
   "tags": []
 }

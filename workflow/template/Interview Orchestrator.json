@@ -1,0 +1,1291 @@
+{
+  "name": "Interview Orchestrator",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "authentication": "basicAuth",
+        "options": {}
+      },
+      "id": "02d09e63-07ec-4e24-96ac-1c6ee32a5d20",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        -224,
+        352
+      ],
+      "webhookId": "db63a14a-bb00-4f1b-ae5b-5bcbf68af7d1",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {},
+      "id": "39d677b7-e531-4b14-8fd2-d56e16c9a6fc",
+      "name": "Extract structured data from a single URL",
+      "type": "n8n-nodes-brightdata.brightData",
+      "position": [
+        0,
+        352
+      ],
+      "executeOnce": true,
+      "typeVersion": 1,
+      "alwaysOutputData": true,
+      "credentials": {}
+    },
+    {
+      "parameters": {},
+      "id": "5604a2c0-0446-4cc8-92b7-8b6a6d46a7d8",
+      "name": "Extract structured data from a single URL1",
+      "type": "n8n-nodes-brightdata.brightData",
+      "position": [
+        224,
+        352
+      ],
+      "executeOnce": true,
+      "typeVersion": 1,
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "https://docs.google.com/spreadsheets/d/1gJ6gB6RQi6LR9qqtdpjcbcyPsmn-SbKyrM5Wt4bDXpA/edit?gid=0#gid=0"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gid=0",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gJ6gB6RQi6LR9qqtdpjcbcyPsmn-SbKyrM5Wt4bDXpA/edit#gid=0",
+          "cachedResultName": "Interested_list"
+        },
+        "columns": {
+          "value": {},
+          "schema": [
+            {
+              "id": "url",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "url",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_posting_id",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_posting_id",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_title",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_title",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company_name",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "company_name",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company_id",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "company_id",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_location",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_location",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_summary",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_summary",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_seniority_level",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_seniority_level",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_function",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_function",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_employment_type",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_employment_type",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_industries",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_industries",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company_url",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "company_url",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_posted_time",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_posted_time",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_num_applicants",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_num_applicants",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "discovery_input",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "discovery_input",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "apply_link",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "apply_link",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "country_code",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "country_code",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "title_id",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "title_id",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company_logo",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "company_logo",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_posted_date",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_posted_date",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_poster",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_poster",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "application_availability",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "application_availability",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "job_description_formatted",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "job_description_formatted",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "base_salary",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "base_salary",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "salary_standards",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "salary_standards",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "timestamp",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "input",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "input",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "635f92b0-1c9c-402e-98ae-1376234297a8",
+      "name": "append job details",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        448,
+        352
+      ],
+      "executeOnce": true,
+      "typeVersion": 4.6
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "https://docs.google.com/spreadsheets/d/1gJ6gB6RQi6LR9qqtdpjcbcyPsmn-SbKyrM5Wt4bDXpA/edit?gid=0#gid=0"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": 1171287591,
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gJ6gB6RQi6LR9qqtdpjcbcyPsmn-SbKyrM5Wt4bDXpA/edit#gid=1171287591",
+          "cachedResultName": "company_detail"
+        },
+        "columns": {
+          "value": {},
+          "schema": [
+            {
+              "id": "id",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "id",
+              "defaultMatch": true,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "name",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "name",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "locations",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "locations",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "followers",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "followers",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "employees_in_linkedin",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "employees_in_linkedin",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "about",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "about",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "specialties",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "specialties",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company_size",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "company_size",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "organization_type",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "organization_type",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "industries",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "industries",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "website",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "website",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "crunchbase_url",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "crunchbase_url",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company_id",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "company_id",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "employees",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "employees",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "headquarters",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "headquarters",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "image",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "image",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "logo",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "logo",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "similar",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "similar",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "url",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "url",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updates",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "updates",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "affiliated",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "affiliated",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "funding",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "funding",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "investors",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "investors",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "formatted_locations",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "formatted_locations",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "get_directions_url",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "get_directions_url",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "description",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "description",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "additional_information",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "additional_information",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "country_codes_array",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "country_codes_array",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "alumni",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "alumni",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "alumni_information",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "alumni_information",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "website_simplified",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "website_simplified",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "unformatted_about",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "unformatted_about",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "timestamp",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "input",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "input",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "country_code",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "country_code",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [
+            "id"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "de8dc6d2-26dd-46e5-86a6-c63c999f95a4",
+      "name": "append company detail",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        672,
+        352
+      ],
+      "executeOnce": true,
+      "typeVersion": 4.6
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Here is the job and company details extracted froom linkedin\n\nCompany Name:  {{ $json.name }}\nabout this company: {{ $json.about }}\nfocus on: {{ $json.specialties }}\nindustry: {{ $json.industries }}\ncompany focus: {{ $json.unformatted_about }}\n\nJob title: {{ $('Extract structured data from a single URL').item.json.job_title }}\njob summary: {{ $('Extract structured data from a single URL').item.json.job_summary }}\nJob seniority level: {{ $('Extract structured data from a single URL').item.json.job_seniority_level }}\njob function: {{ $('Extract structured data from a single URL').item.json.job_function }}\n\nFirst,call resume editor agent/tool for resume fineturning according the company details and job description.\nThen, send company details, job description details and edited resume to HR Reviwer agent/tool for comment and score.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "SYSTEM\nYou are “Master Orchestrator”, the first-pass analyst in a multi-agent résumé-tailoring chain.\n\nGOAL  \nConvert the raw job-posting & company data into a structured, fact-rich JSON object that every other agent can consume without re-scraping.\n\nProcess\n1. Call Resume editor tool agent to process and get the edited resume.\n2. send the edited resume, along with company details and job description to HR reviewer tool agent for review. It will return comment and score.\n3. if the score is low, pass the comment back to resume editor agent to modify. \n4. Repeat the process until the score is above 75%.\n5. When the end condition is reached, please make the output of the LLM paste the edited resume along with the comment mentioning edited changes and the latest HR comment.\n"
+        }
+      },
+      "id": "82deb638-1ff7-4b2a-aa6a-0ad338f879c3",
+      "name": "Master Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        928,
+        320
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-2024-05-13",
+          "cachedResultName": "gpt-4o-2024-05-13"
+        },
+        "options": {}
+      },
+      "id": "810500bd-de53-4ec0-a38f-903d67beb8fc",
+      "name": "GPT-4o",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        768,
+        592
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "description": "Call this tool when u got the company and job description information.HR comment & Suggestion is not exist on the first run. If the resume is reviewed by the HR agent, pass the comment, edited resume, company details and job description to this agent.\nThis agent is to edit resume based on comment/suggestion and company details, and job description.",
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "ceZPRAJoHZIPOgPT",
+          "cachedResultName": "Resume Editor"
+        },
+        "workflowInputs": {
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}"
+          },
+          "schema": [
+            {
+              "id": "query",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "query",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "query"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "975035f9-4f0a-4cbe-8449-7af3bb39fe9f",
+      "name": "Resume Editor",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "position": [
+        912,
+        640
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "description": "Call this tool after the resume is modified by RESUME Editor Agent.\nSend the edited resume, Company details, and job description to this agent so it will review and return comment and mark.",
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "TpHF40TKvreoEqXQ",
+          "cachedResultName": "HR & Technical Reviewer"
+        },
+        "workflowInputs": {
+          "value": {},
+          "schema": [],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "1168a906-da51-4417-9a5f-d49c26303f5e",
+      "name": "HR Reviwer",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "position": [
+        1072,
+        672
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "1dM1IUUOU7ML8HzZ",
+          "cachedResultName": "Cover Letter Agent"
+        },
+        "workflowInputs": {
+          "value": {
+            "query": "={{ $json.output }}"
+          },
+          "schema": [
+            {
+              "id": "query",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "query",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "query"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "id": "2f140018-8d4a-4bad-88ed-47922cf529ee",
+      "name": "Generate Cover Letter",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "position": [
+        1312,
+        336
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "folderId": "=1QRP0jGECu1jtlfo0FvvKlt73SKap0BC3",
+        "title": "={{ $('Extract structured data from a single URL').item.json.company_name }}-{{ $('Extract structured data from a single URL').item.json.job_title }} Proposed Resume"
+      },
+      "id": "e4eb25bc-ba2d-4e0b-82ae-2f9d3ac95616",
+      "name": "Create a document",
+      "type": "n8n-nodes-base.googleDocs",
+      "position": [
+        1520,
+        336
+      ],
+      "executeOnce": true,
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "folderId": "=1UpVOEKTvhBzHqAxuDQ87nJZntie3OCQm",
+        "title": "={{ $('Extract structured data from a single URL').item.json.company_name }}-{{ $('Extract structured data from a single URL').item.json.job_title }} Proposed Cover Letter"
+      },
+      "id": "cb507440-fbfd-44bb-9c70-d99dc5920ed4",
+      "name": "Create a document1",
+      "type": "n8n-nodes-base.googleDocs",
+      "position": [
+        1472,
+        560
+      ],
+      "executeOnce": true,
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $('Master Agent').item.json.output }}"
+            }
+          ]
+        }
+      },
+      "id": "5901175f-7ff7-43e2-acab-3006e130a901",
+      "name": "Update a document",
+      "type": "n8n-nodes-base.googleDocs",
+      "position": [
+        1744,
+        336
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $('Generate Cover Letter').item.json.output }}"
+            }
+          ]
+        }
+      },
+      "id": "eeca923a-d903-4a66-aeaa-f2d9342576b9",
+      "name": "Update a document1",
+      "type": "n8n-nodes-base.googleDocs",
+      "position": [
+        1760,
+        560
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "DhpQ0Pr79VbUrl0g",
+          "cachedResultName": "Interview Coach"
+        },
+        "workflowInputs": {
+          "value": {
+            "query": "=Here is the feedback from HR reviwer, company details, job description and edited resume.\n{{ $('Master Agent').item.json.output }}"
+          },
+          "schema": [
+            {
+              "id": "query",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "query",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "query"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "id": "3b3be599-766d-40e8-82b3-2b4b0277eabe",
+      "name": "Interview Coach",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "position": [
+        2048,
+        512
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "folderId": "=1iYTnDuv8ALwjk92SZc1lkHroc3l0uarn",
+        "title": "={{ $('Extract structured data from a single URL').item.json.company_name }}-{{ $('Extract structured data from a single URL').item.json.job_title }} Interview Coach"
+      },
+      "id": "2a61b27d-3e3b-4b2a-96ad-f0f8533d51b0",
+      "name": "Create a document2",
+      "type": "n8n-nodes-base.googleDocs",
+      "position": [
+        2288,
+        480
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $('Interview Coach').item.json.output }}"
+            }
+          ]
+        }
+      },
+      "id": "16a28a77-ae11-47ea-b87f-a9beec843a00",
+      "name": "Update a document2",
+      "type": "n8n-nodes-base.googleDocs",
+      "position": [
+        2480,
+        512
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Is my workflow done?"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d9155b07-f03c-4869-8f83-6055b23c28dd",
+      "name": "Message a model",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        2704,
+        512
+      ],
+      "typeVersion": 1.8
+    },
+    {
+      "parameters": {
+        "content": "Trigger: When Chat Message Received\n\nStarts the workflow when a message is received (e.g., from Telegram, Slack, or custom UI).\n\nExtract Structured Data from LinkedIn\n\nUses BrightData to scrape and extract job description from the given LinkedIn job URL.\n\nAppend Job & Company Details\n\nSaves structured job data to internal sheets or memory for downstream agents to use.\n\n",
+        "height": 240,
+        "width": 1000
+      },
+      "id": "a6a0d4ac-d168-4e1d-acb3-f0fdabf20b5a",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -240,
+        48
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Master Agent\n\nActs as the central coordinator, passing the job data to sub-agents for task-specific output.",
+        "width": 200
+      },
+      "id": "db8950b0-c3a3-4db4-b7e9-e51216e35c48",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        960,
+        128
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "🤖 Sub-Workflows (Agent Nodes)\nSub-workflows like Resume Editor, Cover Letter Writer, and Interview Coach are:\n\nModular AI agents with a specialized system message and prompt.\n\nBuilt using a simple Agentic (LLM) structure inside the sub-workflow.\n\nThey automatically return their result to the Master Agent when complete.\n\n✅ Tip: Setting up a sub-workflow is simple—just define the agent's role and prompt inside it. No need to manage output paths; results are passed back to the main workflow automatically.",
+        "width": 560
+      },
+      "id": "0bccfd7e-21a1-4723-b086-80a22d14b9ee",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        688,
+        816
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "🗂 Output to Google Drive\nEach agent's response is saved as a new Google Doc:\n\nCreate document → generates a new Google Doc in your Drive.\n\nUpdate document → appends the generated content.\n\nFinal documents:\n\nCover Letter\n\nTailored Resume\n\nInterview Questions & Answers",
+        "width": 740
+      },
+      "id": "f0fe3264-4586-4add-a561-524ebd7f67d7",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1888,
+        192
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "GPT-4o": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Master Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HR Reviwer": {
+      "ai_tool": [
+        [
+          {
+            "node": "Master Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Master Agent": {
+      "main": [
+        [
+          {
+            "node": "Generate Cover Letter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resume Editor": {
+      "ai_tool": [
+        [
+          {
+            "node": "Master Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Interview Coach": {
+      "main": [
+        [
+          {
+            "node": "Create a document2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a document": {
+      "main": [
+        [
+          {
+            "node": "Update a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document": {
+      "main": [
+        [
+          {
+            "node": "Create a document1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a document1": {
+      "main": [
+        [
+          {
+            "node": "Update a document1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a document2": {
+      "main": [
+        [
+          {
+            "node": "Update a document2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document1": {
+      "main": [
+        [
+          {
+            "node": "Interview Coach",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document2": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "append job details": {
+      "main": [
+        [
+          {
+            "node": "append company detail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Cover Letter": {
+      "main": [
+        [
+          {
+            "node": "Create a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "append company detail": {
+      "main": [
+        [
+          {
+            "node": "Master Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "551e9e2f-25ca-488b-b84f-503854177bec",
+  "meta": {
+    "instanceId": "b39098fa88d73a08861a2351c14a261cf9e6ae11855154e6a59e69c1890b07c6"
+  },
+  "id": "btS74CftoyLOxb40",
+  "tags": []
+}

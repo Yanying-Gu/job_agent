@@ -8,10 +8,10 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.3,
       "position": [
-        -192,
-        0
+        -128,
+        416
       ],
-      "id": "fd366534-081e-49fd-946d-35e258b90b46",
+      "id": "ce2bd311-fa1e-401c-9e8e-cba26e80cb4d",
       "name": "When chat message received",
       "webhookId": "d1bdbf79-8e5c-4ac7-96bf-7228d8b7eab8"
     },
@@ -24,10 +24,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        80,
-        0
+        144,
+        416
       ],
-      "id": "0c504999-35a0-4611-afa4-ea45597dd2d5",
+      "id": "f4753ee1-93fd-461e-b273-71bac36f857f",
       "name": "AI Agent"
     },
     {
@@ -42,10 +42,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        -112,
-        208
+        -48,
+        624
       ],
-      "id": "0bd5a1fc-8b6d-4737-bcbf-fd5940b0fb67",
+      "id": "2144988c-7b6b-482d-b3aa-4936db5013b2",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
@@ -57,7 +57,7 @@
     {
       "parameters": {
         "operation": "write",
-        "fileName": "/data/data/job_description.json",
+        "fileName": "/job_agent_data/job_description.json",
         "options": {
           "append": false
         }
@@ -65,26 +65,26 @@
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1,
       "position": [
-        768,
-        0
+        832,
+        416
       ],
-      "id": "f585fa9c-7cd0-4564-9b2f-718260af3838",
+      "id": "4c043ae3-1ba1-4d01-a264-8fcc62931c08",
       "name": "Read/Write Files from Disk"
     },
     {
       "parameters": {
         "operation": "toJson",
         "options": {
-          "fileName": "/data/jd_test.json"
+          "fileName": "job_description.json"
         }
       },
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        560,
-        0
+        624,
+        416
       ],
-      "id": "2800f97b-3d8f-498d-be89-1d77216d0425",
+      "id": "b5397040-8715-4849-9d5b-1e2f750571a9",
       "name": "Convert to File"
     },
     {
@@ -95,10 +95,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        384,
-        0
+        448,
+        416
       ],
-      "id": "f073428a-6659-4c7d-8e52-2344d5f19076",
+      "id": "f22d7fc9-36ca-47ec-a3d4-32835ea36e53",
       "name": "Code in Python (Beta)"
     }
   ],

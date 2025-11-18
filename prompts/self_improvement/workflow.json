@@ -1,0 +1,387 @@
+{
+  "name": "My workflow self-improvement",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the master orchestration agent inside an n8n workflow dedicated to CV refinement. Your job is to coordinate specialist tool agents so the user receives an updated CV plus review insights aligned to the supplied job description. Skip interpreting or rewriting the job description yourself—simply pass the JSON payload onward.\n\nTASK:\n1. Forward the caller-supplied JSON job description to the Update CV agent.\n2. Forward the same JSON job description to the CV Review agent after the CV update is complete.\n3. Return a consolidated response containing the updated CV and the review findings.\n\nAVAILABLE TOOL AGENTS:\n- Update CV Agent\n- CV Review Agent \n\nDETAILED INSTRUCTIONS:\nSTEP 1 – Call Update CV Agent  \n- The job description JSON is available in your input data (from the \"Call 'Load JD'\" workflow node). Access it from your input and pass it directly to the tool.  \n- When calling the \"Update CV\" tool, you MUST pass the job description JSON as the tool's input parameter. The tool description states \"The input is job description JSON that should be passed as the tool parameter\" - so explicitly include the full job description JSON (the complete input data you received) in your tool call.  \n- Format: When you call the tool, pass the job description JSON as a string or JSON object in the tool's input parameter.  \n- The Update CV agent will load the current CV from its own context using the `Load_cv` tool.  \n- Request a revised CV customized for the target role.  \n- Ask the agent to keep factual details intact while adjusting phrasing, ordering, and emphasis.\n\nSTEP 2 – Call CV Review Agent  \n- When calling the \"CV review\" tool, you MUST pass BOTH the updated CV (from Step 1) AND the job description JSON as the tool's input parameters. The tool description states \"Input should be job description and updated cv\".  \n- Request actionable feedback highlighting alignment strengths, gaps, and suggested tweaks.\n\nSTEP 3 – Consolidate Output  \n- Combine the updated CV and the review feedback.  \n- Present the final response with two sections: `updated_cv` and `review_summary`.  \n- Mention any assumptions or clarifications required from the user.\n\nGUARDRAILS:\n- Never fabricate new experience, skills, or metrics.  \n- Preserve sensitive data and confidentiality.  \n- Outputs are drafts intended for manual verification.",
+        "options": {
+          "systemMessage": "You are a helpful assistant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        256,
+        0
+      ],
+      "id": "2221acb0-377c-455c-92b3-44290937aa01",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1152,
+        272
+      ],
+      "id": "32a0f50c-d301-414b-ab71-46cbcdcbffe6",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "S85Pqlm3N6Y4LMzn",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Call this tool to update resume. The input is job description JSON that should be passed as the tool parameter.",
+        "text": "=You are the Update CV tool agent. The master agent forwards you the job description JSON and expects a refined CV aligned with that role.\n\nTASK:\n- Load the current CV using the `Load_cv` tool.\n- Tailor the CV to match the forwarded job description while preserving truthful details.\n\nINPUTS PROVIDED BY MASTER AGENT:\n- structured payload containing role details, requirements, and context.\n\nINSTRUCTIONS:\n\nSTEP 1 – Load Current CV  \n- Invoke `Load_cv` to retrieve the latest CV content.  \n- Use the job description JSON to identify the target role, industry, and key requirements (e.g., `Target Job Industry/Sector` if present).\n\nSTEP 2 – Update CV Content  \n- Reframe project titles and descriptions to highlight relevance for the target industry or sector.  \n- Emphasize achievements and metrics that map to job requirements; do not invent new information.  \n- Maintain consistent style, tone, and formatting. Avoid repeating identical wording across projects.\n\nSTEP 3 – Return Updated CV  \n- Produce the full updated CV ready for the master agent to forward to the review agent.  \n- Include any assumptions or clarifications needed from the user.\n\nIMPORTANT GUARDRAILS:\n- Never fabricate experience, skills, or metrics.  \n- Only rephrase existing content; do not introduce new projects.  \n- Keep wording professional and concise.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        464,
+        256
+      ],
+      "id": "58cf3a98-e683-44d2-a348-ba9b55f3af82",
+      "name": "Update CV"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        160,
+        240
+      ],
+      "id": "290c749b-7a2e-4aab-a4f7-46bbc742b191",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "S85Pqlm3N6Y4LMzn",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmOpenHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        944,
+        64
+      ],
+      "id": "e1848d95-bae6-4fe9-920f-fa6df2b0bcdd",
+      "name": "Hugging Face Inference Model",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "C3TZmxIzvRywZME8",
+          "name": "HuggingFaceApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "qwen3:0.6b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        464,
+        384
+      ],
+      "id": "9ba99a7b-5296-4f2d-97b7-df3501ab0918",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "WUlsbk4h3gY3f8rM",
+          "name": "Ollama account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        32
+      ],
+      "id": "935b78fd-04f2-4ac6-a7b4-de96c6dd9927",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "qqI7hVPaeHU4HmVO",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/qqI7hVPaeHU4HmVO"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -16,
+        32
+      ],
+      "id": "02c080cf-f444-4c97-a309-1f7ea6ec9837",
+      "name": "Call 'Load JD'"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool after the resume is modified by Update CV Agent.\nSend the edited resume, and job description to this agent so it will review and return comment and mark."
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1136,
+        64
+      ],
+      "id": "adc416b0-685c-41fb-b7c3-1150af12bda5",
+      "name": "Call n8n Workflow Tool"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Input should be job description and updated cv",
+        "text": "You are the CV Review tool agent. The master agent sends you the updated CV together with the job description JSON so you can provide targeted feedback.\n\nTASK:\n- Evaluate how well the updated CV aligns with the provided job description.\n- Highlight strengths, gaps, and actionable recommendations without rewriting the CV yourself.\n\nINPUTS PROVIDED BY MASTER AGENT:\n- Updated CV text.\n- Job description JSON (structured payload with role details, requirements, and context).\n\nINSTRUCTIONS:\n\nSTEP 1 – Analyze Job Requirements  \n- Parse the job description JSON to identify role title, responsibilities, required skills, and any preferred qualifications.\n\nSTEP 2 – Review Updated CV  \n- Assess whether the CV emphasizes relevant experience, achievements, and terminology that match the job description.  \n- Note areas where alignment is strong and where additional emphasis or clarification is needed.\n\nSTEP 3 – Produce Review Summary  \n- Return a concise evaluation with the following sections:  \n  - `strengths`: bullet points summarizing what the CV does well for this role.  \n  - `gaps`: bullet points explaining missing elements, unclear points, or weak alignment.  \n  - `recommendations`: actionable guidance for the CV author (no direct edits, just advice).  \n- Assign an overall alignment score from 1–5 (`5` meaning excellent fit) and explain the rationale.\n\nGUARDRAILS:\n- Do not fabricate qualifications or experiences.  \n- Do not rewrite the CV—focus on critique and guidance.  \n- Keep feedback professional, specific, and constructive.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        832,
+        256
+      ],
+      "id": "182c0d6d-7ecd-4888-a673-fdf00183667a",
+      "name": "CV review"
+    },
+    {
+      "parameters": {
+        "model": "qwen3:0.6b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        832,
+        448
+      ],
+      "id": "011cb00a-be55-4aa4-9fcd-b331395d1d34",
+      "name": "Ollama Chat Model1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "WUlsbk4h3gY3f8rM",
+          "name": "Ollama account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "qqI7hVPaeHU4HmVO",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/qqI7hVPaeHU4HmVO"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1168,
+        432
+      ],
+      "id": "21a55a04-09c1-40d4-9575-c8ba63aa8033",
+      "name": "Load job description"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "PVWIW1TzkHvmqtT4",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/PVWIW1TzkHvmqtT4"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        608,
+        464
+      ],
+      "id": "f5303566-e6f6-4ad8-b9b1-daf221aede66",
+      "name": "Load CV"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Update CV": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Update CV",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Call 'Load JD'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Load JD'": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call n8n Workflow Tool": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "CV review": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "CV review",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load job description": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Load CV": {
+      "ai_tool": [
+        [
+          {
+            "node": "Update CV",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5837ccbb-8897-44e4-9b71-c35405ab7774",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b39098fa88d73a08861a2351c14a261cf9e6ae11855154e6a59e69c1890b07c6"
+  },
+  "id": "VYTLSNgTpi9YxjBZ",
+  "tags": []
+}
