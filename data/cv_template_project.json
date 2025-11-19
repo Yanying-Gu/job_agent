@@ -1,0 +1,3 @@
+{
+  "project_description": "Situation: The original SIMS V1 system used a rigid rules engine that was difficult to maintain and could not scale with evolving business needs. An intelligent, automated solution was required to improve efficiency and support growth. Action: Led the end-to-end design of a scalable ML decision engine on AWS SageMaker, translating business needs into production-ready models with full lifecycle coverage. Result: The solution was deployed in 6 countries and automated 50% of maintenance approvals, significantly reducing delays, lowering costs, and enhancing system scalability."
+}
