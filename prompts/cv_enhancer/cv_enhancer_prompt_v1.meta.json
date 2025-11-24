@@ -1,0 +1,21 @@
+{
+  "workflow": "cv_enhancer",
+  "prompt_file": "cv_enhancer_prompt_v1.txt",
+  "purpose": "Core CV generation instructions for the cv_enhancer workflow",
+  "agent_role": "CV Enhancer Coach",
+  "model_hints": [
+    "Use high-token models (e.g., gpt-4 class) for best formatting fidelity",
+    "Supports plain-text output only"
+  ],
+  "sections_required": [
+    "Summary",
+    "Skills & core competence",
+    "Relevant Tools",
+    "Work Experience",
+    "Education",
+    "Extra Curriculum activities"
+  ],
+  "created_at": "2025-11-24",
+  "version": "v1"
+}
+

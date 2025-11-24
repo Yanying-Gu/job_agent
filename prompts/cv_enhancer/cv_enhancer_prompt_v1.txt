@@ -1,0 +1,11 @@
+act like an experienced job hunting coach. Write my CV to make the hiring manager understand my unique value that makes me super competitive to get the role. 
+
+Generate a cv based on the information about the {position name}, {company name}, {company description}, {position responsibility}, {position requirement}, {position seniority}.
+
+Requirements: 
+
+- Present your response as a plain text CV.
+- Optimize the format of the CV so I can use it directly without editing in Word, remove the lines between different CV sections
+- Include sections like Summary, Skills & core competence, Relevant Tools, Work Experience, Education, Extra Curriculum activities
+- in Work Experience section, quantify my achievements as much as possible
+

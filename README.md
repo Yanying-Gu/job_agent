@@ -127,6 +127,16 @@ n8n provides a visual workflow automation interface with built-in LangChain and 
 
 When self-hosting n8n on Windows, mount `C:\Users\yanyi\Documents\AI_project\job_agent\` into /data folder in n8n containern, which enable reading prompts and persist generated files from within the container.
 
+## 📁 Prompt & Workflow Assets
+
+To keep multiple workflows and prompts synchronized, the project follows a consistent layout:
+
+- `workflow/<name>.json` – exported n8n workflows (e.g., `workflow/cv_enhancer.json`).
+- `prompts/<workflow>/` – raw prompt files plus metadata (e.g., `prompts/cv_enhancer/cv_enhancer_prompt_v1.txt` and `.meta.json`).
+- `src/job_agent/utils/` – shared helpers such as `file_utils.load_prompt_file`.
+- `src/scripts/` – automation scripts that inject prompts into workflows.  
+  - Run `poetry run python job_agent/src/scripts/update_cv_enhancer.py` to pull the latest prompt text into the `cv_enhancer` workflow’s AI Agent node.
+
 ### 2. Using Ollama (Local LLM)
 
 Start the local LLM (qwen3:0.6b) that supports HTTP requests:

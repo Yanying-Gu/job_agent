@@ -1,0 +1,93 @@
+{
+  "name": "cv_enhancer",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -160,
+        112
+      ],
+      "id": "3033e90c-12c4-4cd1-93b7-5fda704cd175",
+      "name": "When chat message received",
+      "webhookId": "d1bdbf79-8e5c-4ac7-96bf-7228d8b7eab8"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "act like an experienced job hunting coach. Write my CV to make the hiring manager understand my unique value that makes me super competitive to get the role. \n\nGenerate a cv based on the information about the {position name}, {company name}, {company description}, {position responsibility}, {position requirement}, {position seniority}.\n\nRequirements: \n\n- Present your response as a plain text CV.\n- Optimize the format of the CV so I can use it directly without editing in Word, remove the lines between different CV sections\n- Include sections like Summary, Skills & core competence, Relevant Tools, Work Experience, Education, Extra Curriculum activities\n- in Work Experience section, quantify my achievements as much as possible\n\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        112,
+        112
+      ],
+      "id": "79fd9f1c-4abc-457c-b6cb-ec66723f76d3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -80,
+        320
+      ],
+      "id": "0dc04e70-69b4-4553-b938-0470dd1797fb",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "4lQiD09ZknJtbyVj",
+          "name": "OpenAi account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2421f1ac-d2c2-43c1-95eb-67f87b882cf9",
+  "meta": {
+    "instanceId": "b39098fa88d73a08861a2351c14a261cf9e6ae11855154e6a59e69c1890b07c6"
+  },
+  "id": "IwqiiuDszlxlKN0g",
+  "tags": []
+}
