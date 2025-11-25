@@ -18,7 +18,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "act like an experienced job hunting coach. Write my CV to make the hiring manager understand my unique value that makes me super competitive to get the role. \n\nGenerate a cv based on the information about the {position name}, {company name}, {company description}, {position responsibility}, {position requirement}, {position seniority}.\n\nRequirements: \n\n- Present your response as a plain text CV.\n- Optimize the format of the CV so I can use it directly without editing in Word, remove the lines between different CV sections\n- Include sections like Summary, Skills & core competence, Relevant Tools, Work Experience, Education, Extra Curriculum activities\n- in Work Experience section, quantify my achievements as much as possible\n\n",
+        "text": "act like an experienced job hunting coach. Write my CV to make the hiring manager understand my unique value that makes me super competitive to get the role. \n\nGenerate a cv based on the information about the {position name}, {company name}, {company description}, {position responsibility}, {position requirement}, {position seniority}.\n\nRequirements: \n\n- Present your response as a plain text CV.\n- Optimize the format of the CV so I can use it directly without editing in Word, remove the lines between different CV sections\n- Include sections like Summary, Skills & core competence, Relevant Tools, Work Experience, Education, Extra Curriculum activities\n- in Work Experience section, quantify my achievements as much as possible",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",

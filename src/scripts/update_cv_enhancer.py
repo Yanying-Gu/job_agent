@@ -12,17 +12,23 @@ SRC_DIR = REPO_ROOT / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from job_agent.utils.file_utils import load_prompt_file
+import frontmatter
 
 WORKFLOW_PATH = REPO_ROOT / "workflow" / "cv_enhancer.json"
 PROMPT_PATH = REPO_ROOT / "prompts" / "cv_enhancer" / "cv_enhancer_prompt_v1.txt"
 
 
 def update_workflow() -> None:
-    """Read the prompt file and inject it into the AI Agent node."""
-    prompt_text = load_prompt_file(PROMPT_PATH, ignore_comments=False)
+    """Read the prompt file (with frontmatter) and inject content into the AI Agent node."""
+    if not PROMPT_PATH.exists():
+        raise FileNotFoundError(f"Prompt file not found: {PROMPT_PATH}")
+
+    content = PROMPT_PATH.read_text(encoding="utf-8")
+    post = frontmatter.loads(content)
+    prompt_text = post.content.strip()
+
     if not prompt_text:
-        raise FileNotFoundError(f"Unable to read prompt from {PROMPT_PATH}")
+        raise ValueError(f"Prompt file is empty or has no content: {PROMPT_PATH}")
 
     workflow_data = json.loads(WORKFLOW_PATH.read_text(encoding="utf-8"))
     nodes = workflow_data.get("nodes", [])

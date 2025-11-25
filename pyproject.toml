@@ -8,6 +8,7 @@ packages = [{include = "job_agent", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+python-frontmatter = "^1.0.0"
 # Add your dependencies here as you use them
 # Example:
 # openai = "^1.0.0"

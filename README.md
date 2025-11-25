@@ -132,10 +132,66 @@ When self-hosting n8n on Windows, mount `C:\Users\yanyi\Documents\AI_project\job
 To keep multiple workflows and prompts synchronized, the project follows a consistent layout:
 
 - `workflow/<name>.json` – exported n8n workflows (e.g., `workflow/cv_enhancer.json`).
-- `prompts/<workflow>/` – raw prompt files plus metadata (e.g., `prompts/cv_enhancer/cv_enhancer_prompt_v1.txt` and `.meta.json`).
-- `src/job_agent/utils/` – shared helpers such as `file_utils.load_prompt_file`.
+- `prompts/<workflow>/` – prompt files with embedded frontmatter metadata (e.g., `prompts/cv_enhancer/cv_enhancer_prompt_v1.txt`).
+- `src/job_agent/utils/` – shared helpers including `PromptRegistry` for searching prompts.
 - `src/scripts/` – automation scripts that inject prompts into workflows.  
-  - Run `poetry run python job_agent/src/scripts/update_cv_enhancer.py` to pull the latest prompt text into the `cv_enhancer` workflow’s AI Agent node.
+  - Run `poetry run python src/scripts/update_cv_enhancer.py` to pull the latest prompt text into the `cv_enhancer` workflow's AI Agent node.
+
+### Prompt Format (Frontmatter)
+
+Prompts use **frontmatter** (YAML metadata at the top of the file) to store searchable metadata:
+
+```yaml
+---
+workflow: cv_enhancer
+purpose: Core CV generation instructions
+agent_role: CV Enhancer Coach
+version: v1
+tags: [cv, generation, plain_text]
+model_hints:
+  - Use high-token models for best formatting
+created_at: "2025-11-24"
+---
+
+Your actual prompt content goes here...
+```
+
+### Searching Prompts
+
+Use the `PromptRegistry` class or CLI tool to search prompts:
+
+**Python API:**
+```python
+from job_agent.utils.prompt_registry import PromptRegistry
+
+registry = PromptRegistry()
+# Search by workflow
+prompts = registry.get_by_workflow("cv_enhancer")
+# Search by multiple criteria
+results = registry.search(
+    workflow="cv_enhancer",
+    tags=["cv", "generation"],
+    agent_role="Coach"
+)
+```
+
+**CLI Tool:**
+```bash
+# List all prompts
+poetry run python src/scripts/search_prompts.py --list-all
+
+# Search by workflow
+poetry run python src/scripts/search_prompts.py --workflow cv_enhancer
+
+# Search by tags
+poetry run python src/scripts/search_prompts.py --tags cv generation
+
+# Search by agent role
+poetry run python src/scripts/search_prompts.py --agent-role "CV Enhancer"
+
+# Output as JSON
+poetry run python src/scripts/search_prompts.py --workflow cv_enhancer --format json
+```
 
 ### 2. Using Ollama (Local LLM)
 
