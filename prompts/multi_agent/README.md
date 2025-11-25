@@ -1,6 +1,6 @@
 ## Overview
 
-This experiment sets up an n8n multi-agent flow dedicated to CV refinement. A master agent coordinates two specialized tool agents, ensuring CV updates and reviews happen in a single automated loop.
+This experiment sets up an n8n multi-agent flow dedicated to CV refinement. The workflow is stored in `workflow/multi_agent.json` and is synced in/out of n8n via the `workflow/` directory. A master agent coordinates two specialized tool agents, ensuring CV updates and reviews happen in a single automated loop.
 
 ## Agent Roles
 
@@ -30,6 +30,6 @@ This experiment sets up an n8n multi-agent flow dedicated to CV refinement. A ma
 
 ## Notes
 
-- Ensure n8n nodes reference the renamed prompt files.
+- Ensure n8n nodes reference the latest prompt files and workflow JSON paths.
 - Future iterations can add more tool agents (e.g., cover letter generation) within the same orchestration pattern.
 

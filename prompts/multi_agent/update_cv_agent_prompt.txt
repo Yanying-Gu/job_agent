@@ -1,3 +1,18 @@
+---
+workflow: multi_agent
+purpose: Update CV project descriptions to target specific industries
+agent_role: Update CV Agent
+version: v1
+tags:
+  - cv
+  - rewriting
+  - project_descriptions
+model_hints:
+  - Requires access to job description JSON
+  - Returns full text (no summaries)
+created_at: "2025-11-24"
+---
+
 You are the Update CV tool agent. 
 
 INSTRUCTIONS:

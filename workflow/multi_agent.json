@@ -1,10 +1,13 @@
 {
-  "name": "workflow",
+  "name": "multi_agent",
   "nodes": [
     {
       "parameters": {
         "promptType": "define",
-        "text": "=You are the master orchestration agent inside an n8n workflow dedicated to CV refinement. Your job is to coordinate specialist tool agents so the user receives an updated CV plus review insights aligned to the supplied job description. Skip interpreting or rewriting the job description yourself—simply pass the JSON payload onward.\n\nAVAILABLE TOOL AGENTS:\n- Update CV Agent\n- CV Review Agent \n\nDETAILED INSTRUCTIONS:\nSTEP 1 – Call Update CV Agent  \n- The job description JSON arrives as part of your input data (from the \"Call 'Load JD'\" workflow node). If you are unsure which key contains it, treat the entire input payload as `job_description_json`.  \n- CRITICAL: Store this payload in a variable named `job_description_json` BEFORE calling the Update CV tool so you can reuse it in Step 2.  \n- WHEN YOU START, CALL THE \"Update CV\" TOOL EXACTLY ONCE AND WAIT FOR ITS RESPONSE BEFORE DOING ANYTHING ELSE.  \n- Pass the stored `job_description_json` as the tool input (the tool description states \"The input is job description JSON that should be passed as the tool parameter\").  \n- It is acceptable if some fields are empty—only stop if the entire payload is completely missing. Otherwise proceed and note any gaps later.  \n- When the Update CV tool returns, capture the COMPLETE, VERBATIM response from the tool. This is the full updated project description text that the tool produced.  \n- CRITICAL: Store the ENTIRE tool response output as `updated_project_description`—do NOT summarize, paraphrase, or extract only parts of it. Copy the complete text exactly as returned by the tool.  \n- If the tool response contains multiple sections or formatting, include everything. The goal is to preserve the full updated project description text for the review step.  \n- Do not call the CV Review tool yet.\n\nSTEP 2 – Call CV Review Agent  \n- After Step 1 completes, call the \"CV review\" tool.  \n- CRITICAL: You MUST pass BOTH inputs to the CV Review tool:\n  1. The stored `updated_project_description` (the COMPLETE, VERBATIM text output from the Update CV tool in Step 1—do not summarize or truncate it)\n  2. The stored `job_description_json` (the same payload captured in Step 1, even if some fields are blank)\n- The tool description states \"Input should be job description and updated cv\" - so explicitly include BOTH values in your tool call. Format: pass both as separate parameters or as a combined object with both fields.  \n- If `updated_project_description` is missing or empty, stop and raise an error instead of calling the review tool.  \n- If `job_description_json` is missing entirely, note the issue and stop. If it exists but has empty fields, still pass it along unchanged.  \n- Request actionable feedback highlighting alignment strengths, gaps, and suggested tweaks.  \n- Wait for the CV Review response before moving on.\n\nSTEP 3 – Consolidate Output  \n- Combine the updated project description and the review feedback.  \n- Present the final response with two sections: `updated_project_description` and `review_summary`.  \n- Mention any assumptions or clarifications required from the user.\n\nGUARDRAILS:\n- Never fabricate new experience, skills, or metrics.  \n- Preserve sensitive data and confidentiality.  \n- Outputs are drafts intended for manual verification."
+        "text": "You are the master orchestration agent inside an n8n workflow dedicated to CV refinement. Your job is to coordinate specialist tool agents so the user receives an updated CV plus review insights aligned to the supplied job description. Skip interpreting or rewriting the job description yourself\u2014simply pass the JSON payload onward.\n\nTASK:\n1. Forward the caller-supplied JSON job description to the Update CV agent.\n2. Forward the same JSON job description plus the updated project description to the CV Review agent after the update is complete.\n3. Return a consolidated response containing the updated project description and the review findings.\n\nAVAILABLE TOOL AGENTS:\n- Update CV Agent\n- CV Review Agent \n\nDETAILED INSTRUCTIONS:\nSTEP 1 \u2013 Call Update CV Agent  \n- The job description JSON arrives as part of your input data (from the \"Call 'Load JD'\" workflow node). If you\u2019re not sure which key contains it, treat the entire input payload as `job_description_json`.  \n- CRITICAL: Store this payload (even if its structure varies) in a variable named `job_description_json` BEFORE calling the Update CV tool so you can reuse it in Step 2.  \n- WHEN YOU START, CALL THE \"Update CV\" TOOL EXACTLY ONCE AND WAIT FOR ITS RESPONSE BEFORE DOING ANYTHING ELSE.  \n- Pass the stored `job_description_json` as the tool input (the tool description states \"The input is job description JSON that should be passed as the tool parameter\").  \n- It\u2019s acceptable if some fields are empty\u2014only stop if the entire payload is completely missing. Otherwise proceed and note any missing pieces later.  \n- When the Update CV tool returns, capture the COMPLETE, VERBATIM response from the tool. This is the full updated project description text that the tool produced.  \n- CRITICAL: Store the ENTIRE tool response output as `updated_project_description`\u2014do NOT summarize, paraphrase, or extract only parts of it. Copy the complete text exactly as returned by the tool.  \n- If the tool response contains multiple sections or formatting, include everything. The goal is to preserve the full updated project description text for the review step.  \n- Do not call the CV Review tool yet.\n\nSTEP 2 \u2013 Call CV Review Agent  \n- After Step 1 completes, call the \"CV review\" tool.  \n- CRITICAL: You MUST pass BOTH inputs to the CV Review tool:\n  1. The stored `updated_project_description` (the COMPLETE, VERBATIM text output from the Update CV tool in Step 1\u2014do not summarize or truncate it)\n  2. The stored `job_description_json` (the same payload captured in Step 1, even if some fields were blank)\n- The tool description states \"Input should be job description and updated cv\" - so explicitly include BOTH values in your tool call. Format: pass both as separate parameters or as a combined object with both fields.\n- If `updated_project_description` is missing or empty, stop and raise an error message instead of calling the review tool.  \n- If `job_description_json` is missing entirely, note the issue and stop. If it exists but has empty fields, still pass it along unchanged.  \n- Request actionable feedback highlighting alignment strengths, gaps, and suggested tweaks.  \n- Wait for the CV Review response before moving on.\n\nSTEP 3 \u2013 Consolidate Output  \n- Combine the updated project description and the review feedback.  \n- Present the final response with two sections: `updated_project_description` and `review_summary`.  \n- Mention any assumptions or clarifications required from the user.\n\nGUARDRAILS:\n- Never fabricate new experience, skills, or metrics.  \n- Preserve sensitive data and confidentiality.  \n- Outputs are drafts intended for manual verification.",
+        "options": {
+          "systemMessage": "You are a helpful assistant"
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
@@ -12,7 +15,7 @@
         -704,
         -320
       ],
-      "id": "48c13c92-5cc9-4d35-a50a-21ae6672f08d",
+      "id": "1d24b2f4-2e23-449b-9e47-b68c794f6bec",
       "name": "AI Agent"
     },
     {
@@ -20,7 +23,7 @@
         "language": "python",
         "pythonCode": "# item[\"output\"] is a escaped JSON, not a real dictionary\n# JSON data is stored inside a string, not as structured JSON\n# Need to unescape JSON\nimport json\n\nparsed_items = []\n\nfor item in _input.all():  # list of input items\n    data = item.get(\"json\", {})   # grab the nested json dict\n    raw_output = data.get(\"output\", \"\")  # now 'output' exists\n    if not raw_output:\n        parsed_items.append({\"raw_output\": \"MISSING\"})\n        continue\n    try:\n        parsed = json.loads(raw_output)  # convert string to dict\n        parsed_items.append(parsed)\n    except json.JSONDecodeError:\n        parsed_items.append({\"raw_output\": raw_output})\n\n# Return structured JSON back to n8n\nreturn parsed_items"
       },
-      "id": "502ac4c3-bc11-4901-8ec2-01c795f5fb3b",
+      "id": "f86f29c1-a583-462b-8b57-ff81841d9cf4",
       "name": "Parse Master Output",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -44,7 +47,7 @@
         240,
         -48
       ],
-      "id": "f484de3a-cdc7-4c44-971c-3d833c9d5c9d",
+      "id": "d345e823-8a6f-425b-b3ad-d01ff8cf7118",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
@@ -56,7 +59,8 @@
     {
       "parameters": {
         "toolDescription": "Call this tool to update resume. The input is job description JSON that should be passed as the tool parameter.",
-        "text": "=You are the Update CV tool agent. \n\nINSTRUCTIONS:\n\nSTEP 1 – Load Current CV  \n- Call `Load_CV` tool to fetch the existing CV content.\n\n\nSTEP 2 – Extract Industry Focus  \n- For every project section in the CV, Based on target industry sector, {{ $json[\"Target Job Industry/Sector\"]}},\n  - Rephrase the project description so the achievements and impact clearly support that industry.  \n\nSTEP 3 – Return Updated Project Description  \n- Output the COMPLETE updated project description text. This must be the full, finished text ready for review—not a summary, not partial content, but the entire updated project description.  \n- The master agent will forward this exact text to the CV Review agent, so ensure it's complete and self-contained.  \n\n\nIMPORTANT GUARDRAILS:\n- Never fabricate experience, skills, or metrics.  \n- Keep the original tone, tense, and formatting where possible.  \n- Avoid repeating identical wording across projects."
+        "text": "=You are the Update CV tool agent. \n\nINSTRUCTIONS:\n\nSTEP 1 \u2013 Load Current CV  \n- Call `Load_CV` tool to fetch the existing CV content.\n\n\nSTEP 2 \u2013 Extract Industry Focus  \n- For every project section in the CV, Based on target industry sector, {{ $json[\"Target Job Industry/Sector\"]}},\n  - Rephrase the project description so the achievements and impact clearly support that industry.  \n\nSTEP 3 \u2013 Return Updated Project Description  \n- Output the COMPLETE updated project description text. This must be the full, finished text ready for review\u2014not a summary, not partial content, but the entire updated project description.  \n- The master agent will forward this exact text to the CV Review agent, so ensure it's complete and self-contained.  \n\n\nIMPORTANT GUARDRAILS:\n- Never fabricate experience, skills, or metrics.  \n- Keep the original tone, tense, and formatting where possible.  \n- Avoid repeating identical wording across projects.",
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agentTool",
       "typeVersion": 2.2,
@@ -64,7 +68,7 @@
         -496,
         -64
       ],
-      "id": "efb5d8f8-1801-4d5f-9e5c-ebc24e882066",
+      "id": "49990124-bac7-4c7a-a168-ceb0a9b21904",
       "name": "Update CV"
     },
     {
@@ -83,7 +87,7 @@
         -736,
         -112
       ],
-      "id": "5ba2521e-6f5f-45c9-9c7e-30df86b7f245",
+      "id": "6b57a4fd-8c07-4255-bf35-6e2fbc2ba3de",
       "name": "OpenAI Chat Model1",
       "credentials": {
         "openAiApi": {
@@ -102,7 +106,7 @@
         240,
         -240
       ],
-      "id": "dc0f8db3-ef17-4c4f-95bc-692ae23b63f2",
+      "id": "60dc30f1-6ffd-442b-9c50-609182f961da",
       "name": "Hugging Face Inference Model",
       "credentials": {
         "huggingFaceApi": {
@@ -122,7 +126,7 @@
         -544,
         144
       ],
-      "id": "e09efeec-e3ca-448f-8a04-cd9b730754ff",
+      "id": "7a2092bd-b13d-4a05-bb56-69de06944f65",
       "name": "Ollama Chat Model",
       "credentials": {
         "ollamaApi": {
@@ -139,8 +143,8 @@
         -1216,
         -288
       ],
-      "id": "82026db2-502f-4f23-8617-69731486622f",
-      "name": "When clicking ‘Execute workflow’"
+      "id": "eb3355ce-298d-4941-bd33-a342f98b03c4",
+      "name": "When clicking \u2018Execute workflow\u2019"
     },
     {
       "parameters": {
@@ -168,7 +172,7 @@
         -976,
         -288
       ],
-      "id": "e77f7ca3-3177-4bdb-9a14-6491d771bda9",
+      "id": "53301941-389d-44a5-b3f5-290d70894dca",
       "name": "Call 'Load JD'"
     },
     {
@@ -181,13 +185,14 @@
         384,
         -240
       ],
-      "id": "5548bd40-8aaa-48ae-a9c4-09e9df0511c5",
+      "id": "226f42c2-311b-400c-8f6d-150fc5247231",
       "name": "Call n8n Workflow Tool"
     },
     {
       "parameters": {
         "toolDescription": "Input should be job description and updated cv",
-        "text": "You are the CV Review tool agent. The master agent sends you an updated project description together with the job description JSON so you can provide targeted feedback.\n\nTASK:\n- Evaluate how well the updated project description aligns with the provided job description.\n- Highlight strengths, gaps, and actionable recommendations without rewriting the project yourself.\n\nINPUTS PROVIDED BY MASTER AGENT:\n- Updated project description text.\n- Job description JSON (structured payload with role details, requirements, and context).\n\nINSTRUCTIONS:\n\nSTEP 1 – Validate Inputs  \n- If the updated project description text is missing or empty, immediately respond with \"Updated project description not provided\" and stop.\n\nSTEP 2 – Analyze Job Requirements  \n- Parse the job description JSON to identify role title, responsibilities, required skills, and any preferred qualifications.\n\nSTEP 3 – Review Updated Project Description  \n- Assess whether the description emphasizes relevant experience, achievements, and terminology that match the job description.  \n- Note areas where alignment is strong and where additional emphasis or clarification is needed.\n\nSTEP 4 – Produce Review Summary  \n- Return a concise evaluation with the following sections:  \n  - `strengths`: bullet points summarizing what the project description does well for this role.  \n  - `gaps`: bullet points explaining missing elements, unclear points, or weak alignment.  \n  - `recommendations`: actionable guidance for the CV author (no direct edits, just advice).  \n- Assign an overall alignment score from 1–5 (`5` meaning excellent fit) and explain the rationale.\n\nGUARDRAILS:\n- Do not fabricate qualifications or experiences.  \n- Do not rewrite the project text—focus on critique and guidance.  \n- Keep feedback professional, specific, and constructive."
+        "text": "You are the CV Review tool agent. The master agent sends you an updated project description together with the job description JSON so you can provide targeted feedback.\n\nTASK:\n- Evaluate how well the updated project description aligns with the provided job description.\n- Highlight strengths, gaps, and actionable recommendations without rewriting the project yourself.\n\nINPUTS PROVIDED BY MASTER AGENT:\n- Updated project description text.\n- Job description JSON (structured payload with role details, requirements, and context).\n\nINSTRUCTIONS:\n\nSTEP 1 \u2013 Validate Inputs  \n- If the updated project description text is missing or empty, immediately respond with \"Updated project description not provided\" and stop.\n\nSTEP 2 \u2013 Analyze Job Requirements  \n- Parse the job description JSON to identify role title, responsibilities, required skills, and any preferred qualifications.\n\nSTEP 3 \u2013 Review Updated Project Description  \n- Assess whether the description emphasizes relevant experience, achievements, and terminology that match the job description.  \n- Note areas where alignment is strong and where additional emphasis or clarification is needed.\n\nSTEP 4 \u2013 Produce Review Summary  \n- Return a concise evaluation with the following sections:  \n  - `strengths`: bullet points summarizing what the project description does well for this role.  \n  - `gaps`: bullet points explaining missing elements, unclear points, or weak alignment.  \n  - `recommendations`: actionable guidance for the CV author (no direct edits, just advice).  \n- Assign an overall alignment score from 1\u20135 (`5` meaning excellent fit) and explain the rationale.\n\nGUARDRAILS:\n- Do not fabricate qualifications or experiences.  \n- Do not rewrite the project text\u2014focus on critique and guidance.  \n- Keep feedback professional, specific, and constructive.",
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agentTool",
       "typeVersion": 2.2,
@@ -195,7 +200,7 @@
         -128,
         -64
       ],
-      "id": "9534258f-6494-4aca-91ec-e35cd03111b7",
+      "id": "87713a20-ca38-4ddf-9b9d-8e6c4793163e",
       "name": "CV review"
     },
     {
@@ -209,7 +214,7 @@
         -128,
         128
       ],
-      "id": "15eb2d80-814b-437d-a4fa-1d6837db7401",
+      "id": "d0988c48-0487-45ab-8486-7037131060a4",
       "name": "Ollama Chat Model1",
       "credentials": {
         "ollamaApi": {
@@ -241,7 +246,7 @@
         256,
         112
       ],
-      "id": "95d4f630-04dc-48a1-ab6a-4e09f127d83d",
+      "id": "3ed26f85-14a6-4f0a-92bf-1d5b488eca84",
       "name": "Load job description"
     },
     {
@@ -257,5 +262,185 @@
           "value": {},
           "matchingColumns": [],
           "schema": [],
-          "attemptToConvertTypes": false
-
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -352,
+        144
+      ],
+      "id": "e34d036e-df81-4cda-afa5-f467df11cb8e",
+      "name": "Load_CV"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/job_agent_data/output.json",
+        "options": {
+          "append": false
+        }
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        16,
+        -320
+      ],
+      "id": "d1ed48f5-f974-4711-86ac-676f92500c07",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {
+          "fileName": "output.json"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -192,
+        -320
+      ],
+      "id": "33d9589a-dd06-40e1-90cc-72c1fccf79b3",
+      "name": "Convert to File"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Update CV": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Update CV",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \u2018Execute workflow\u2019": {
+      "main": [
+        [
+          {
+            "node": "Call 'Load JD'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Load JD'": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CV review": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "CV review",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load_CV": {
+      "ai_tool": [
+        [
+          {
+            "node": "Update CV",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Master Output": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Parse Master Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "29712874-513a-4b19-bed6-e01f1c137983",
+  "meta": {
+    "instanceId": "b39098fa88d73a08861a2351c14a261cf9e6ae11855154e6a59e69c1890b07c6"
+  },
+  "id": "Sb3Mw5TdRsutmO9Q",
+  "tags": []
+}
