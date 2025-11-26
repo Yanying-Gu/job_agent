@@ -1,0 +1,93 @@
+{
+  "name": "motivation_letter_enhancer",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -160,
+        112
+      ],
+      "id": "3033e90c-12c4-4cd1-93b7-5fda704cd175",
+      "name": "When chat message received",
+      "webhookId": "d1bdbf79-8e5c-4ac7-96bf-7228d8b7eab8"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Act like an experienced job-hunting coach. Based on my CV, the job description, and the existing draft of my motivation letter, rewrite and enhance my motivation letter to maximize my chances of getting an interview.\n\nGoals:\n- Clearly explain why I am motivated to work for this specific company and in this specific role.\n- Highlight my most relevant experiences, achievements, and skills that match the job requirements.\n- Use a confident, professional, but warm tone that sounds like a human, not an AI.\n\nRequirements:\n- Keep the structure of a standard motivation/cover letter: opening, body paragraphs, and closing.\n- Make the letter concise, focused, and easy to skim (short paragraphs, clear flow).\n- Remove redundant or generic statements; be as specific as possible based on the provided inputs.\n- Keep the output as plain text only (no markdown, bullet points, or special formatting).",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        112,
+        112
+      ],
+      "id": "79fd9f1c-4abc-457c-b6cb-ec66723f76d3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -80,
+        320
+      ],
+      "id": "0dc04e70-69b4-4553-b938-0470dd1797fb",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "4lQiD09ZknJtbyVj",
+          "name": "OpenAi account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6af1041d-b287-4afd-b823-a66374074c6b",
+  "meta": {
+    "instanceId": "b39098fa88d73a08861a2351c14a261cf9e6ae11855154e6a59e69c1890b07c6"
+  },
+  "id": "IwqiiuDszlxlKN0g",
+  "tags": []
+}
